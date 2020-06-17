@@ -1,1 +1,1 @@
-# FisheryDataVisualization
+# Thesis Project

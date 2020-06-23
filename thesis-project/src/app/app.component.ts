@@ -2,6 +2,7 @@ import { Component, NgZone } from "@angular/core";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import { DataService } from './services/data.service';
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -12,13 +13,16 @@ am4core.useTheme(am4themes_animated);
 export class AppComponent {
 	title = "thesis-project";
 
-	private chart: am4charts.XYChart;
+	//private chart: am4charts.XYChart;
 
-	constructor(private zone: NgZone) { }
+	constructor(
+		private zone: NgZone,
+		private dataService: DataService
+	) { }
 
 	ngAfterViewInit() {
 		this.zone.runOutsideAngular(() => {
-			let chart = am4core.create("chartdiv", am4charts.XYChart);
+			let chart = am4core.create("chartdiv2", am4charts.XYChart);
 
 			chart.paddingRight = 20;
 
@@ -49,15 +53,37 @@ export class AppComponent {
 			scrollbarX.series.push(series);
 			chart.scrollbarX = scrollbarX;
 
-			this.chart = chart;
+			//this.chart = chart;
 		});
 	}
 
 	ngOnDestroy() {
 		this.zone.runOutsideAngular(() => {
-			if (this.chart) {
-				this.chart.dispose();
-			}
+			// if (this.chart) {
+			// 	this.chart.dispose();
+			// }
 		});
+	}
+
+	getTestFile() {
+		this.dataService.getTestFile().subscribe(r => {
+			let chart: am4charts.PieChart = am4core.create("chartdiv", am4charts.PieChart);
+			var pieSeries = chart.series.push(new am4charts.PieSeries());
+			let data = r.map(d => <any>{ fishType: d["Species"], value: String(d["British Columbia"]) });
+			console.log(data.map(d => <any>{ ...d, value: parseFloat(d.value!="-"?d.value.replace(',', ''):0) }))
+			data = data.map(d => <any>{ ...d, value: parseFloat(d.value!="-"?d.value.replace(',', ''):0) });
+			// r.map(d=><any>{fishType:d["Species"], value: d["British Columbia"].replace(",", "")})
+			chart.data=data;
+			pieSeries.dataFields.value = "value";
+			pieSeries.dataFields.category = "fishType";
+			pieSeries.slices.template.stroke = am4core.color("#fff");
+			pieSeries.slices.template.strokeWidth = 2;
+			pieSeries.slices.template.strokeOpacity = 1;
+
+			// This creates initial animation
+			pieSeries.hiddenState.properties.opacity = 1;
+			pieSeries.hiddenState.properties.endAngle = -90;
+			pieSeries.hiddenState.properties.startAngle = -90;
+		})
 	}
 }

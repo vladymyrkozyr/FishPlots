@@ -9,6 +9,6 @@ export class DataService {
 	constructor(private http: HttpClient){}
 
 	getTestFile(): Observable<any> {
-		return this.http.get("assets/files/s1990pq_e.json", { responseType: "json" });
+		return this.http.get("assets/files/json/sea fish quantities/s1990pq_e.json", { responseType: "json" });
 	}
 }

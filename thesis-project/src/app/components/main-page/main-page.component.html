@@ -1,0 +1,59 @@
+<div class="row">
+	<div class="col-md-3">
+		<button kendoButton
+				[icon]="'refresh'"
+				(click)="getTestFile()">
+			Get Data
+		</button>
+	</div>
+	<div class="col-md-3">
+		<kendo-floatinglabel [text]="'Years'">
+			<kendo-multiselect [data]="years"
+							   [(value)]="yearsSelected"
+							   (valueChange)="onYearsChange($event)"
+							   [autoClose]="false">
+				<ng-template kendoMultiSelectItemTemplate
+							 let-dataItem>
+					<input type="checkbox"
+						   class="k-checkbox"
+						   [checked]="isYearSelected(dataItem)">
+					<label class="k-checkbox-label">{{ dataItem }}</label>
+				</ng-template>
+			</kendo-multiselect>
+		</kendo-floatinglabel>
+	</div>
+	<div class="col-md-3">
+		<kendo-floatinglabel [text]="'Provinces'">
+			<kendo-multiselect [data]="provinces"
+							   [(value)]="provincesSelected"
+							   (valueChange)="onProvincesChange($event)"
+							   [autoClose]="false">
+				<ng-template kendoMultiSelectItemTemplate
+							 let-dataItem>
+					<input type="checkbox"
+						   class="k-checkbox"
+						   [checked]="isProvinceSelected(dataItem)">
+					<label class="k-checkbox-label">{{ dataItem }}</label>
+				</ng-template>
+			</kendo-multiselect>
+		</kendo-floatinglabel>
+	</div>
+	<div class="col-md-3">
+		<kendo-floatinglabel [text]="'Fish Types'">
+			<kendo-multiselect [data]="fishTypes"
+							   [(value)]="fishTypesSelected"
+							   (valueChange)="onFishTypesChange($event)"
+							   [autoClose]="false">
+				<ng-template kendoMultiSelectItemTemplate
+							 let-dataItem>
+					<input type="checkbox"
+						   class="k-checkbox"
+						   [checked]="isFishTypeSelected(dataItem)">
+					<label class="k-checkbox-label">{{ dataItem }}</label>
+				</ng-template>
+			</kendo-multiselect>
+		</kendo-floatinglabel>
+	</div>
+</div>
+<div id="chartdiv"
+	 style="width: 100%; height: 1300px"></div>

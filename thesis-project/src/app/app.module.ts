@@ -13,10 +13,12 @@ import { HttpClient, HttpClientModule } from "@angular/common/http";
 import { ButtonsModule } from "@progress/kendo-angular-buttons";
 import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
 import { LabelModule } from "@progress/kendo-angular-label";
+import { MainPageComponent } from './components/main-page/main-page.component';
 
 @NgModule({
 	declarations: [
-		AppComponent
+		AppComponent,
+		MainPageComponent
 	],
 	imports: [
 		BrowserModule,

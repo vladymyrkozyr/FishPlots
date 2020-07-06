@@ -88,6 +88,7 @@ export class MainPageComponent implements OnInit {
 	}
 
 	dataQuantities = {};
+	summarizedDataByYearsAndProvinces = {};
 
 	constructor(
 		private dataService: DataService
@@ -96,33 +97,35 @@ export class MainPageComponent implements OnInit {
 	ngOnInit(): void { }
 
 	getTestFile(): void {
-		this.dataService.getTestFile().subscribe(r => {
-			let chart: am4charts.PieChart = am4core.create("chartdiv", am4charts.PieChart);
-			var pieSeries = chart.series.push(new am4charts.PieSeries());
-			let data = r.map(d => <any>{ fishType: d["Species"], value: String(d["British Columbia"]) });
-			console.log(data.map(d => <any>{ ...d, value: parseFloat(d.value != "-" ? d.value.replace(',', '') : 0) }))
-			data = data.map(d => <any>{ ...d, value: parseFloat(d.value != "-" ? d.value.replace(',', '') : 0) });
-			// r.map(d=><any>{fishType:d["Species"], value: d["British Columbia"].replace(",", "")})
-			chart.data = data;
-			pieSeries.dataFields.value = "value";
-			pieSeries.dataFields.category = "fishType";
-			pieSeries.slices.template.stroke = am4core.color("#fff");
-			pieSeries.slices.template.strokeWidth = 2;
-			pieSeries.slices.template.strokeOpacity = 1;
+		// this.dataService.getTestFile().subscribe(r => {
+		// 	let chart: am4charts.PieChart = am4core.create("chartdiv", am4charts.PieChart);
+		// 	var pieSeries = chart.series.push(new am4charts.PieSeries());
+		// 	let data = r.map(d => <any>{ fishType: d["Species"], value: String(d["British Columbia"]) });
+		// 	console.log(data.map(d => <any>{ ...d, value: parseFloat(d.value != "-" ? d.value.replace(',', '') : 0) }))
+		// 	data = data.map(d => <any>{ ...d, value: parseFloat(d.value != "-" ? d.value.replace(',', '') : 0) });
+		// 	// r.map(d=><any>{fishType:d["Species"], value: d["British Columbia"].replace(",", "")})
+		// 	chart.data = data;
+		// 	pieSeries.dataFields.value = "value";
+		// 	pieSeries.dataFields.category = "fishType";
+		// 	pieSeries.slices.template.stroke = am4core.color("#fff");
+		// 	pieSeries.slices.template.strokeWidth = 2;
+		// 	pieSeries.slices.template.strokeOpacity = 1;
 
-			// This creates initial animation
-			pieSeries.hiddenState.properties.opacity = 1;
-			pieSeries.hiddenState.properties.endAngle = -90;
-			pieSeries.hiddenState.properties.startAngle = -90;
-		});
+		// 	// This creates initial animation
+		// 	pieSeries.hiddenState.properties.opacity = 1;
+		// 	pieSeries.hiddenState.properties.endAngle = -90;
+		// 	pieSeries.hiddenState.properties.startAngle = -90;
+		// });
 
 		let fileRequests = [];
 
 		for (let i: number = 1990; i <= 2018; i++) {
-			fileRequests.push(this.dataService.getFileByUrl("assets/files/json/sea fish quantities/s1991pq_e.json"));
+			fileRequests.push(this.dataService.getFileByUrl(`assets/files/json/sea fish quantities/s${i}pq_e.json`));
 		}
 
 		forkJoin(fileRequests).subscribe((files: any[]) => {
+
+			console.log(files)
 
 			for (let i: number = 0; i <= 28; i++) {
 				this.dataQuantities[i + 1990] = files[i].map(d => <any>{
@@ -137,11 +140,80 @@ export class MainPageComponent implements OnInit {
 			}
 
 			console.log(this.dataQuantities);
+
+			this.lineChartSummarizedByProvinces();
 		});
 	}
 
 	parseStringValue(value: any): number {
 		return parseFloat(!["-", "x", "X"].includes(String(value)) ? String(value).replace(",", "") : "0");
+	}
+
+	lineChartSummarizedByProvinces() {
+		let data = [];
+		for(let i: number = 1990; i <= 2018; i++){
+			console.log(this.dataQuantities[i]);
+			// console.log(this.dataQuantities[i].reduce((sum, current) => sum + current["British Columbia"], 0))
+			 data.push({
+				 year:i,
+				 value1:this.dataQuantities[i].reduce((sum, current) => sum + current["British Columbia"], 0),
+				 value2:this.dataQuantities[i].reduce((sum, current) => sum + current["Quebec"], 0)
+
+				})
+		}
+
+		let chart = am4core.create("chartdiv", am4charts.XYChart);
+		chart.data = data;
+
+		let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
+		categoryAxis.dataFields.category = "year";
+		categoryAxis.renderer.minGridDistance = 50;
+		categoryAxis.renderer.grid.template.location = 0.5;
+		categoryAxis.startLocation = 0.5;
+		categoryAxis.endLocation = 0.5;
+
+		// Create value axis
+		let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
+		valueAxis.baseValue = 0;
+
+		// Create series
+		let series1 = chart.series.push(new am4charts.LineSeries());
+		series1.dataFields.valueY = "value1";
+		series1.dataFields.categoryX = "year";
+		series1.strokeWidth = 2;
+
+		let series2 = chart.series.push(new am4charts.LineSeries());
+		series2.dataFields.valueY = "value2";
+		series2.dataFields.categoryX = "year";
+		series2.strokeWidth = 2;
+
+
+
+		//series.tensionX = 0.77;
+
+		// bullet is added because we add tooltip to a bullet for it to change color
+		// let bullet = series.bullets.push(new am4charts.Bullet());
+		// bullet.tooltipText = "{valueY}";
+
+		// bullet.adapter.add("fill", function (fill, target) {
+		// 	if (target.dataItem.valueY < 0) {
+		// 		return am4core.color("#FF0000");
+		// 	}
+		// 	return fill;
+		// })
+		// let range = valueAxis.createSeriesRange(series);
+		// range.value = 0;
+		// range.endValue = -1000;
+		// range.contents.stroke = am4core.color("#FF0000");
+		// range.contents.fill = range.contents.stroke;
+
+		// Add scrollbar
+		var scrollbarX = new am4charts.XYChartScrollbar();
+		scrollbarX.series.push(series1);
+		scrollbarX.series.push(series2);
+		chart.scrollbarX = scrollbarX;
+
+		chart.cursor = new am4charts.XYCursor();
 	}
 
 }

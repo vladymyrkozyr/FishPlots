@@ -3,6 +3,7 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { DataService } from 'src/app/services/data.service';
+import { forkJoin } from 'rxjs';
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -86,6 +87,8 @@ export class MainPageComponent implements OnInit {
 		console.log(event);
 	}
 
+	dataQuantities = {};
+
 	constructor(
 		private dataService: DataService
 	) { }
@@ -111,7 +114,34 @@ export class MainPageComponent implements OnInit {
 			pieSeries.hiddenState.properties.opacity = 1;
 			pieSeries.hiddenState.properties.endAngle = -90;
 			pieSeries.hiddenState.properties.startAngle = -90;
-		})
+		});
+
+		let fileRequests = [];
+
+		for (let i: number = 1990; i <= 2018; i++) {
+			fileRequests.push(this.dataService.getFileByUrl("assets/files/json/sea fish quantities/s1991pq_e.json"));
+		}
+
+		forkJoin(fileRequests).subscribe((files: any[]) => {
+
+			for (let i: number = 0; i <= 28; i++) {
+				this.dataQuantities[i + 1990] = files[i].map(d => <any>{
+					fishType: d["Species"],
+					"Nova Scotia": this.parseStringValue(d["Nova Scotia"]),
+					"New Brunswick": this.parseStringValue(d["New Brunswick"]),
+					"Prince Edward Island": this.parseStringValue(d["Prince Edward Island"]),
+					"Quebec": this.parseStringValue(d["Quebec"]),
+					"Newfoundland and Labrador": this.parseStringValue(d["Newfoundland and Labrador"]),
+					"British Columbia": this.parseStringValue(d["Nova Scotia"])
+				}).filter(d => d.fishType != "");
+			}
+
+			console.log(this.dataQuantities);
+		});
+	}
+
+	parseStringValue(value: any): number {
+		return parseFloat(!["-", "x", "X"].includes(String(value)) ? String(value).replace(",", "") : "0");
 	}
 
 }

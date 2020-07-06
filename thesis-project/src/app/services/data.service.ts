@@ -6,9 +6,13 @@ import { Observable } from 'rxjs';
 })
 export class DataService {
 
-	constructor(private http: HttpClient){}
+	constructor(private http: HttpClient) { }
 
 	getTestFile(): Observable<any> {
-		return this.http.get("assets/files/json/sea fish quantities/s1990pq_e.json", { responseType: "json" });
+		return this.http.get("assets/files/json/sea fish quantities/s1991pq_e.json", { responseType: "json" });
+	}
+
+	getFileByUrl(url: string): Observable<any> {
+		return this.http.get(url, { responseType: "json" });
 	}
 }

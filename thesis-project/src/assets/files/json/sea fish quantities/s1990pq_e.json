@@ -1,326 +1,35 @@
 [
-  {
-    "Species": "Cod",
-    "Nova Scotia": "112,612",
-    "New Brunswick": "10,371",
-    "Prince Edward Island": "4,103",
-    "Quebec": "22,284",
-    "Newfoundland and Labrador": "245,654",
-    "British Columbia": "6,233"
-  },
-  {
-    "Species": "Haddock",
-    "Nova Scotia": "20,192",
-    "New Brunswick": 15,
-    "Prince Edward Island": 1,
-    "Quebec": 1,
-    "Newfoundland and Labrador": "1,938",
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Redfish",
-    "Nova Scotia": "25,960",
-    "New Brunswick": "2,465",
-    "Prince Edward Island": "14,013",
-    "Quebec": "12,260",
-    "Newfoundland and Labrador": "26,727",
-    "British Columbia": "27,739"
-  },
-  {
-    "Species": "Halibut",
-    "Nova Scotia": "1,809",
-    "New Brunswick": 47,
-    "Prince Edward Island": 1,
-    "Quebec": 254,
-    "Newfoundland and Labrador": 303,
-    "British Columbia": "5,032"
-  },
-  {
-    "Species": "Flatfishes",
-    "Nova Scotia": "15,522",
-    "New Brunswick": "2,413",
-    "Prince Edward Island": "1,485",
-    "Quebec": "2,793",
-    "Newfoundland and Labrador": "41,450",
-    "British Columbia": "7,184"
-  },
-  {
-    "Species": "Greenland turbot",
-    "Nova Scotia": 440,
-    "New Brunswick": 72,
-    "Prince Edward Island": 0,
-    "Quebec": "2,104",
-    "Newfoundland and Labrador": "16,986",
-    "British Columbia": "2,602"
-  },
-  {
-    "Species": "Pollock",
-    "Nova Scotia": "35,648",
-    "New Brunswick": 910,
-    "Prince Edward Island": 8,
-    "Quebec": 1,
-    "Newfoundland and Labrador": "1,818",
-    "British Columbia": 676
-  },
-  {
-    "Species": "Hake",
-    "Nova Scotia": "11,437",
-    "New Brunswick": 768,
-    "Prince Edward Island": "2,067",
-    "Quebec": 315,
-    "Newfoundland and Labrador": 601,
-    "British Columbia": "79,453"
-  },
-  {
-    "Species": "Cusk",
-    "Nova Scotia": "3,540",
-    "New Brunswick": 3,
-    "Prince Edward Island": "-",
-    "Quebec": "-",
-    "Newfoundland and Labrador": "-",
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Catfish",
-    "Nova Scotia": 814,
-    "New Brunswick": 6,
-    "Prince Edward Island": 0,
-    "Quebec": 61,
-    "Newfoundland and Labrador": 657,
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Skate",
-    "Nova Scotia": 113,
-    "New Brunswick": "-",
-    "Prince Edward Island": "-",
-    "Quebec": 1,
-    "Newfoundland and Labrador": 12,
-    "British Columbia": 183
-  },
-  {
-    "Species": "Dogfish",
-    "Nova Scotia": 916,
-    "New Brunswick": 27,
-    "Prince Edward Island": 297,
-    "Quebec": 74,
-    "Newfoundland and Labrador": 1,
-    "British Columbia": "4,109"
-  },
-  {
-    "Species": "Other",
-    "Nova Scotia": "2,825",
-    "New Brunswick": 10,
-    "Prince Edward Island": 1,
-    "Quebec": 23,
-    "Newfoundland and Labrador": 412,
-    "British Columbia": "10,392"
-  },
-  {
-    "Species": "Herring",
-    "Nova Scotia": "111,868",
-    "New Brunswick": "100,018",
-    "Prince Edward Island": "14,132",
-    "Quebec": "6,267",
-    "Newfoundland and Labrador": "27,988",
-    "British Columbia": "41,056"
-  },
-  {
-    "Species": "Mackerel",
-    "Nova Scotia": "9,196",
-    "New Brunswick": "3,823",
-    "Prince Edward Island": "2,551",
-    "Quebec": "1,971",
-    "Newfoundland and Labrador": "4,249",
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Swordfish",
-    "Nova Scotia": 909,
-    "New Brunswick": "-",
-    "Prince Edward Island": "-",
-    "Quebec": "-",
-    "Newfoundland and Labrador": 3,
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Tuna",
-    "Nova Scotia": 318,
-    "New Brunswick": "-",
-    "Prince Edward Island": 9,
-    "Quebec": "-",
-    "Newfoundland and Labrador": 143,
-    "British Columbia": 275
-  },
-  {
-    "Species": "Alewife",
-    "Nova Scotia": "2,802",
-    "New Brunswick": "5,027",
-    "Prince Edward Island": 83,
-    "Quebec": "-",
-    "Newfoundland and Labrador": "-",
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Eel",
-    "Nova Scotia": 26,
-    "New Brunswick": 240,
-    "Prince Edward Island": 124,
-    "Quebec": 416,
-    "Newfoundland and Labrador": 147,
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Salmon",
-    "Nova Scotia": "-",
-    "New Brunswick": "-",
-    "Prince Edward Island": 0,
-    "Quebec": 74,
-    "Newfoundland and Labrador": 614,
-    "British Columbia": "96,396"
-  },
-  {
-    "Species": "Smelt",
-    "Nova Scotia": 35,
-    "New Brunswick": 810,
-    "Prince Edward Island": 85,
-    "Quebec": 114,
-    "Newfoundland and Labrador": 37,
-    "British Columbia": 0
-  },
-  {
-    "Species": "Capelin",
-    "Nova Scotia": "-",
-    "New Brunswick": "-",
-    "Prince Edward Island": "-",
-    "Quebec": 317,
-    "Newfoundland and Labrador": "127,103",
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Other",
-    "Nova Scotia": 274,
-    "New Brunswick": 113,
-    "Prince Edward Island": 85,
-    "Quebec": 158,
-    "Newfoundland and Labrador": 140,
-    "British Columbia": 244
-  },
-  {
-    "Species": "Clams/quahaug",
-    "Nova Scotia": "10,628",
-    "New Brunswick": "2,131",
-    "Prince Edward Island": "1,269",
-    "Quebec": 705,
-    "Newfoundland and Labrador": "7,717",
-    "British Columbia": "6,600"
-  },
-  {
-    "Species": "Oyster",
-    "Nova Scotia": 72,
-    "New Brunswick": 792,
-    "Prince Edward Island": "1,774",
-    "Quebec": "-",
-    "Newfoundland and Labrador": 1,
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Scallop",
-    "Nova Scotia": "69,623",
-    "New Brunswick": "8,325",
-    "Prince Edward Island": 799,
-    "Quebec": "3,623",
-    "Newfoundland and Labrador": 959,
-    "British Columbia": 69
-  },
-  {
-    "Species": "Squid",
-    "Nova Scotia": "1,139",
-    "New Brunswick": 0,
-    "Prince Edward Island": "-",
-    "Quebec": "-",
-    "Newfoundland and Labrador": "4,450",
-    "British Columbia": 72
-  },
-  {
-    "Species": "Mussel",
-    "Nova Scotia": "-",
-    "New Brunswick": 80,
-    "Prince Edward Island": "2,697",
-    "Quebec": 88,
-    "Newfoundland and Labrador": 47,
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Lobster",
-    "Nova Scotia": "22,467",
-    "New Brunswick": "8,908",
-    "Prince Edward Island": "10,246",
-    "Quebec": "3,311",
-    "Newfoundland and Labrador": "2,921",
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Shrimp",
-    "Nova Scotia": "3,996",
-    "New Brunswick": "3,649",
-    "Prince Edward Island": "-",
-    "Quebec": "9,636",
-    "Newfoundland and Labrador": "19,981",
-    "British Columbia": "2,700"
-  },
-  {
-    "Species": "Crab, Queen",
-    "Nova Scotia": "3,259",
-    "New Brunswick": "4,328",
-    "Prince Edward Island": 560,
-    "Quebec": "6,976",
-    "Newfoundland and Labrador": "11,054",
-    "British Columbia": "-"
-  },
-  {
-    "Species": "Crab, Other",
-    "Nova Scotia": 30,
-    "New Brunswick": 311,
-    "Prince Edward Island": 406,
-    "Quebec": 117,
-    "Newfoundland and Labrador": "-",
-    "British Columbia": "2,168"
-  },
-  {
-    "Species": "Sea urchin",
-    "Nova Scotia": 14,
-    "New Brunswick": 95,
-    "Prince Edward Island": "-",
-    "Quebec": "-",
-    "Newfoundland and Labrador": "-",
-    "British Columbia": "3,639"
-  },
-  {
-    "Species": "Other",
-    "Nova Scotia": 13,
-    "New Brunswick": 105,
-    "Prince Edward Island": "-",
-    "Quebec": 430,
-    "Newfoundland and Labrador": 129,
-    "British Columbia": "1,684"
-  },
-  {
-    "Species": "Seafish/Shellfish",
-    "Nova Scotia": "468,495",
-    "New Brunswick": "155,863",
-    "Prince Edward Island": "56,796",
-    "Quebec": "74,376",
-    "Newfoundland and Labrador": "544,243",
-    "British Columbia": "298,508"
-  },
-  {
-    "Species": "",
-    "Nova Scotia": "",
-    "New Brunswick": "",
-    "Prince Edward Island": "",
-    "Quebec": "",
-    "Newfoundland and Labrador": "",
-    "British Columbia": ""
-  }
+{"Species":"Cod","Nova Scotia":" 112,612","New Brunswick":" 10,371","Prince Edward Island":" 4,103","Quebec":" 22,284","Newfoundland and Labrador":" 245,654","British Columbia":" 6,233"},
+{"Species":"Haddock","Nova Scotia":" 20,192","New Brunswick":"15","Prince Edward Island":"1","Quebec":"1","Newfoundland and Labrador":" 1,938","British Columbia":"-"},
+{"Species":"Redfish","Nova Scotia":" 25,960","New Brunswick":" 2,465","Prince Edward Island":" 14,013","Quebec":" 12,260","Newfoundland and Labrador":" 26,727","British Columbia":" 27,739"},
+{"Species":"Halibut","Nova Scotia":" 1,809","New Brunswick":"47","Prince Edward Island":"1","Quebec":"254","Newfoundland and Labrador":"303","British Columbia":" 5,032"},
+{"Species":"Flatfishes","Nova Scotia":" 15,522","New Brunswick":" 2,413","Prince Edward Island":" 1,485","Quebec":" 2,793","Newfoundland and Labrador":" 41,450","British Columbia":" 7,184"},
+{"Species":"Greenland turbot","Nova Scotia":"440","New Brunswick":"72","Prince Edward Island":"0","Quebec":" 2,104","Newfoundland and Labrador":" 16,986","British Columbia":" 2,602"},
+{"Species":"Pollock","Nova Scotia":" 35,648","New Brunswick":"910","Prince Edward Island":"8","Quebec":"1","Newfoundland and Labrador":" 1,818","British Columbia":"676"},
+{"Species":"Hake","Nova Scotia":" 11,437","New Brunswick":"768","Prince Edward Island":" 2,067","Quebec":"315","Newfoundland and Labrador":"601","British Columbia":" 79,453"},
+{"Species":"Cusk","Nova Scotia":" 3,540","New Brunswick":"3","Prince Edward Island":"-","Quebec":"-","Newfoundland and Labrador":"-","British Columbia":"-"},
+{"Species":"Catfish","Nova Scotia":"814","New Brunswick":"6","Prince Edward Island":"0","Quebec":"61","Newfoundland and Labrador":"657","British Columbia":"-"},
+{"Species":"Skate","Nova Scotia":"113","New Brunswick":"-","Prince Edward Island":"-","Quebec":"1","Newfoundland and Labrador":"12","British Columbia":"183"},
+{"Species":"Dogfish","Nova Scotia":"916","New Brunswick":"27","Prince Edward Island":"297","Quebec":"74","Newfoundland and Labrador":"1","British Columbia":" 4,109"},
+{"Species":"Herring","Nova Scotia":" 111,868","New Brunswick":" 100,018","Prince Edward Island":" 14,132","Quebec":" 6,267","Newfoundland and Labrador":" 27,988","British Columbia":" 41,056"},
+{"Species":"Mackerel","Nova Scotia":" 9,196","New Brunswick":" 3,823","Prince Edward Island":" 2,551","Quebec":" 1,971","Newfoundland and Labrador":" 4,249","British Columbia":"-"},
+{"Species":"Swordfish","Nova Scotia":"909","New Brunswick":"-","Prince Edward Island":"-","Quebec":"-","Newfoundland and Labrador":"3","British Columbia":"-"},
+{"Species":"Tuna","Nova Scotia":"318","New Brunswick":"-","Prince Edward Island":"9","Quebec":"-","Newfoundland and Labrador":"143","British Columbia":"275"},
+{"Species":"Alewife","Nova Scotia":" 2,802","New Brunswick":" 5,027","Prince Edward Island":"83","Quebec":"-","Newfoundland and Labrador":"-","British Columbia":"-"},
+{"Species":"Eel","Nova Scotia":"26","New Brunswick":"240","Prince Edward Island":"124","Quebec":"416","Newfoundland and Labrador":"147","British Columbia":"-"},
+{"Species":"Salmon","Nova Scotia":"-","New Brunswick":"-","Prince Edward Island":"0","Quebec":"74","Newfoundland and Labrador":"614","British Columbia":" 96,396"},
+{"Species":"Smelt","Nova Scotia":"35","New Brunswick":"810","Prince Edward Island":"85","Quebec":"114","Newfoundland and Labrador":"37","British Columbia":"0"},
+{"Species":"Capelin","Nova Scotia":"-","New Brunswick":"-","Prince Edward Island":"-","Quebec":"317","Newfoundland and Labrador":" 127,103","British Columbia":"-"},
+{"Species":"Clams/quahaug","Nova Scotia":" 10,628","New Brunswick":" 2,131","Prince Edward Island":" 1,269","Quebec":"705","Newfoundland and Labrador":" 7,717","British Columbia":" 6,600"},
+{"Species":"Oyster","Nova Scotia":"72","New Brunswick":"792","Prince Edward Island":" 1,774","Quebec":"-","Newfoundland and Labrador":"1","British Columbia":"-"},
+{"Species":"Scallop","Nova Scotia":" 69,623","New Brunswick":" 8,325","Prince Edward Island":"799","Quebec":" 3,623","Newfoundland and Labrador":"959","British Columbia":"69"},
+{"Species":"Squid","Nova Scotia":" 1,139","New Brunswick":"0","Prince Edward Island":"-","Quebec":"-","Newfoundland and Labrador":" 4,450","British Columbia":"72"},
+{"Species":"Mussel","Nova Scotia":"-","New Brunswick":"80","Prince Edward Island":" 2,697","Quebec":"88","Newfoundland and Labrador":"47","British Columbia":"-"},
+{"Species":"Lobster","Nova Scotia":" 22,467","New Brunswick":" 8,908","Prince Edward Island":" 10,246","Quebec":" 3,311","Newfoundland and Labrador":" 2,921","British Columbia":"-"},
+{"Species":"Shrimp","Nova Scotia":" 3,996","New Brunswick":" 3,649","Prince Edward Island":"-","Quebec":" 9,636","Newfoundland and Labrador":" 19,981","British Columbia":" 2,700"},
+{"Species":"Crab, Queen","Nova Scotia":" 3,259","New Brunswick":" 4,328","Prince Edward Island":"560","Quebec":" 6,976","Newfoundland and Labrador":" 11,054","British Columbia":"-"},
+{"Species":"Crab, Other","Nova Scotia":"30","New Brunswick":"311","Prince Edward Island":"406","Quebec":"117","Newfoundland and Labrador":"-","British Columbia":" 2,168"},
+{"Species":"Sea urchin","Nova Scotia":"14","New Brunswick":"95","Prince Edward Island":"-","Quebec":"-","Newfoundland and Labrador":"-","British Columbia":" 3,639"},
+{"Species":"Seafish/Shellfish","Nova Scotia":" 468,495","New Brunswick":" 155,863","Prince Edward Island":" 56,796","Quebec":" 74,376","Newfoundland and Labrador":" 544,243","British Columbia":" 298,508"},
+{"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""}
 ]

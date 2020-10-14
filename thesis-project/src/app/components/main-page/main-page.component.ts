@@ -59,7 +59,7 @@ export class MainPageComponent implements OnInit {
 
 	years: string[] = [...Array(28).keys()].map(i => (1990 + i).toString());
 
-	fishTypesSelected: string[] = [];
+	fishTypesSelected: string[] = [...this.fishTypes];
 	provincesSelected: string[] = [];
 	yearsSelected: string[] = [];
 
@@ -155,9 +155,14 @@ export class MainPageComponent implements OnInit {
 			console.log(this.dataQuantities[i]);
 			// console.log(this.dataQuantities[i].reduce((sum, current) => sum + current["British Columbia"], 0))
 			 data.push({
-				 year:i,
-				 value1:this.dataQuantities[i].reduce((sum, current) => sum + current["British Columbia"], 0),
-				 value2:this.dataQuantities[i].reduce((sum, current) => sum + current["Quebec"], 0)
+                 year:i.toString(),
+
+                //  this.provinces.map(p=><any>{
+
+                //  })
+
+				 value1:this.dataQuantities[i].filter(d=>this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current["British Columbia"], 0),
+				 value2:this.dataQuantities[i].filter(d=>this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current["Quebec"], 0)
 
 				})
 		}
@@ -181,11 +186,13 @@ export class MainPageComponent implements OnInit {
 		series1.dataFields.valueY = "value1";
 		series1.dataFields.categoryX = "year";
 		series1.strokeWidth = 2;
+		series1.name = "British Columbia";
 
 		let series2 = chart.series.push(new am4charts.LineSeries());
 		series2.dataFields.valueY = "value2";
 		series2.dataFields.categoryX = "year";
 		series2.strokeWidth = 2;
+		series2.name = "Quebec";
 
 
 
@@ -212,6 +219,10 @@ export class MainPageComponent implements OnInit {
 		scrollbarX.series.push(series1);
 		scrollbarX.series.push(series2);
 		chart.scrollbarX = scrollbarX;
+
+		chart.legend = new am4charts.Legend();
+
+		chart.legend.position = "top";
 
 		chart.cursor = new am4charts.XYCursor();
 	}

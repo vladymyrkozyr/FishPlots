@@ -34,15 +34,5 @@
     {"Species":"Whelks","Nova Scotia":"x","New Brunswick":"0","Prince Edward Island":"0","Quebec":"x","Newfoundland and Labrador":"4,744","British Columbia":"0"},
     {"Species":"Cockles","Nova Scotia":"0","New Brunswick":"0","Prince Edward Island":"0","Quebec":"0","Newfoundland and Labrador":"x","British Columbia":"0"},
     {"Species":"Sea cucumber","Nova Scotia":"1,990","New Brunswick":"x","Prince Edward Island":"0","Quebec":"1,153","Newfoundland and Labrador":"x","British Columbia":"0"},
-    {"Species":"Sea urchin","Nova Scotia":"x","New Brunswick":"1,041","Prince Edward Island":"0","Quebec":"x","Newfoundland and Labrador":"658","British Columbia":"1,858"},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""}
+    {"Species":"Sea urchin","Nova Scotia":"x","New Brunswick":"1,041","Prince Edward Island":"0","Quebec":"x","Newfoundland and Labrador":"658","British Columbia":"1,858"}
     ]

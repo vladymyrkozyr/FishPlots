@@ -34,8 +34,4 @@
     {"Species":"Whelks","Nova Scotia":"x","New Brunswick":"0","Prince Edward Island":"0","Quebec":"x","Newfoundland and Labrador":"899","Atlantic Total":"x","British Columbia":"0","Total Canada":"x"},
     {"Species":"Cockles","Nova Scotia":"x","New Brunswick":"0","Prince Edward Island":"0","Quebec":"0","Newfoundland and Labrador":"x","Atlantic Total":"x","British Columbia":"0","Total Canada":"x"},
     {"Species":"Sea cucumber","Nova Scotia":"2,274","New Brunswick":"x","Prince Edward Island":"0","Quebec":"x","Newfoundland and Labrador":"3,707","Atlantic Total":"8,186","British Columbia":"1,736","Total Canada":"9,922"},
-    {"Species":"Sea urchin","Nova Scotia":"190","New Brunswick":"832","Prince Edward Island":"0","Quebec":"674","Newfoundland and Labrador":"569","Atlantic Total":"2,265","British Columbia":"3,126","Total Canada":"5,391"},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","Atlantic Total":"","British Columbia":"","Total Canada":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","Atlantic Total":"","British Columbia":"","Total Canada":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","Atlantic Total":"","British Columbia":"","Total Canada":""}
-    ]
+    {"Species":"Sea urchin","Nova Scotia":"190","New Brunswick":"832","Prince Edward Island":"0","Quebec":"674","Newfoundland and Labrador":"569","Atlantic Total":"2,265","British Columbia":"3,126","Total Canada":"5,391"}]

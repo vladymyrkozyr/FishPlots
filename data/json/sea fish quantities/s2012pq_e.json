@@ -34,14 +34,5 @@
     {"Species":"Whelks","Nova Scotia":"1","New Brunswick":"0","Prince Edward Island":"11","Quebec":"1,432","Newfoundland and Labrador":"4,910","British Columbia":"0"},
     {"Species":"Cockles","Nova Scotia":"0","New Brunswick":"0","Prince Edward Island":"0","Quebec":"0","Newfoundland and Labrador":"x","British Columbia":"0"},
     {"Species":"Sea cucumber","Nova Scotia":"2,178","New Brunswick":"x","Prince Edward Island":"0","Quebec":"1,441","Newfoundland and Labrador":"x","British Columbia":"0"},
-    {"Species":"Sea urchin","Nova Scotia":"330","New Brunswick":"989","Prince Edward Island":"0","Quebec":"687","Newfoundland and Labrador":"519","British Columbia":"1,543"},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""},
-    {"Species":"","Nova Scotia":"","New Brunswick":"","Prince Edward Island":"","Quebec":"","Newfoundland and Labrador":"","British Columbia":""}
+    {"Species":"Sea urchin","Nova Scotia":"330","New Brunswick":"989","Prince Edward Island":"0","Quebec":"687","Newfoundland and Labrador":"519","British Columbia":"1,543"}
     ]

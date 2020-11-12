@@ -4,6 +4,7 @@ import * as am4charts from "@amcharts/amcharts4/charts";
 import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { DataService } from "src/app/services/data.service";
 import { forkJoin } from "rxjs";
+import { DataHelper } from 'src/app/helpers/data.hepler';
 am4core.useTheme(am4themes_animated);
 
 @Component({
@@ -13,51 +14,9 @@ am4core.useTheme(am4themes_animated);
 })
 export class MainPageComponent implements OnInit {
 
-	fishTypes: string[] = [
-		"Cod",
-		"Haddock",
-		"Redfish",
-		"Halibut",
-		"Flatfishes",
-		"Pollock",
-		"Hake",
-		"Cusk",
-		"Catfish",
-		"Skate",
-		"Dogfish",
-		"Herring",
-		"Mackerel",
-		"Swordfish",
-		"Tuna",
-		"Alewife",
-		"Eel",
-		"Salmon",
-		"Smelt",
-		"Silversides",
-		"Shark",
-		"Capelin",
-		"Oyster",
-		"Scallop",
-		"Squid",
-		"Mussel",
-		"Lobster",
-		"Shrimp",
-		"Crab, Queen",
-		"Crab, Other",
-		"Whelks",
-		"Cockles"
-	].sort();
-
-	provinces: string[] = [
-		"Nova Scotia",
-		"New Brunswick",
-		"Prince Edward Island",
-		"Quebec",
-		"Newfoundland and Labrador",
-		"British Columbia"
-	].sort();
-
-	years: string[] = [...Array(28).keys()].map(i => (1990 + i).toString());
+	fishTypes: string[] = DataHelper.fishTypes;
+	provinces: string[] = DataHelper.provinces;
+	years: string[] = DataHelper.years;
 
 	fishTypesSelected: string[] = [...this.fishTypes];
 	provincesSelected: string[] = [];
@@ -67,7 +26,7 @@ export class MainPageComponent implements OnInit {
 		return this.fishTypesSelected.some(fishType => fishType == item);
 	}
 
-	onFishTypesChange(event) {
+	onFishTypesChange(event: string) {
 		console.log(event);
 	}
 
@@ -75,7 +34,7 @@ export class MainPageComponent implements OnInit {
 		return this.provincesSelected.some(province => province == item);
 	}
 
-	onProvincesChange(event) {
+	onProvincesChange(event: string) {
 		console.log(event);
 	}
 
@@ -83,7 +42,7 @@ export class MainPageComponent implements OnInit {
 		return this.yearsSelected.some(year => year == item);
 	}
 
-	onYearsChange(event) {
+	onYearsChange(event: string) {
 		console.log(event);
 	}
 
@@ -95,24 +54,26 @@ export class MainPageComponent implements OnInit {
 		private dataService: DataService
 	) { }
 
-	ngOnInit(): void { }
+	ngOnInit() { }
 
-	getTestFile(): void {
+	getData() {
 
 		let fileRequestsQuantities = [];
 		let fileRequestsValues = [];
 
-		for (let i: number = 1990; i <= 2018; i++) {
+		for (let i: number = DataHelper.startYear; i <= DataHelper.endYear; i++) {
 			fileRequestsQuantities.push(this.dataService.getFileByUrl(`assets/files/json/sea fish quantities/s${i}pq_e.json`));
 			fileRequestsValues.push(this.dataService.getFileByUrl(`assets/files/json/sea fish values/s${i}pv_e.json`));
 		}
 
-		forkJoin([...fileRequestsQuantities, ...fileRequestsValues]).subscribe((files:any[]) => {
+		forkJoin([...fileRequestsQuantities, ...fileRequestsValues]).subscribe((files: any[]) => {
 
 			console.log(files)
+			console.log(DataHelper.yearsAmount)
 
-			for (let i: number = 0; i <= 28; i++) {
-				this.dataQuantities[i + 1990] = files[i].map(d => <any>{
+			for (let i: number = 0; i <= DataHelper.yearsAmount; i++) {
+				console.log(i);
+				this.dataQuantities[i + DataHelper.startYear] = files[i].map(d => <any>{
 					fishType: d["Species"],
 					"Nova Scotia": this.parseStringValue(d["Nova Scotia"]),
 					"New Brunswick": this.parseStringValue(d["New Brunswick"]),
@@ -122,7 +83,7 @@ export class MainPageComponent implements OnInit {
 					"British Columbia": this.parseStringValue(d["Nova Scotia"])
 				}).filter(d => d.fishType != "");
 
-				this.dataValues[i + 1990] = files[i + 29].map(d => <any>{
+				this.dataValues[i + DataHelper.startYear] = files[i + DataHelper.yearsAmount + 1].map(d => <any>{
 					fishType: d["Species"],
 					"Nova Scotia": this.parseStringValue(d["Nova Scotia"]),
 					"New Brunswick": this.parseStringValue(d["New Brunswick"]),
@@ -141,25 +102,25 @@ export class MainPageComponent implements OnInit {
 	}
 
 	parseStringValue(value: any): number {
-		return parseFloat(!["-", "x", "X"].includes(String(value)) ? String(value).replace(",", "") : "0");
+		return DataHelper.parseStringValue(value);
 	}
 
 	lineChartSummarizedByProvinces() {
 		let data = [];
-		for(let i: number = 1990; i <= 2018; i++){
+		for (let i: number = DataHelper.startYear; i <= DataHelper.endYear; i++) {
 			console.log(this.dataQuantities[i]);
 			// console.log(this.dataQuantities[i].reduce((sum, current) => sum + current["British Columbia"], 0))
-			 data.push({
-                 year:i.toString(),
+			data.push({
+				year: i.toString(),
 
-                //  this.provinces.map(p=><any>{
+				//  this.provinces.map(p=><any>{
 
-                //  })
+				//  })
 
-				 value1:this.dataQuantities[i].filter(d=>this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current["British Columbia"], 0),
-				 value2:this.dataQuantities[i].filter(d=>this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current["Quebec"], 0)
+				value1: this.dataQuantities[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current["British Columbia"], 0),
+				value2: this.dataQuantities[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current["Quebec"], 0)
 
-				})
+			})
 		}
 
 		let chart = am4core.create("chartdiv", am4charts.XYChart);

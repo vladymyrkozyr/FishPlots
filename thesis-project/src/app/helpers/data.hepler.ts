@@ -1,3 +1,12 @@
+
+export enum ProvincesEnum {
+	NovaScotia = "Nova Scotia",
+	NewBrunswick = "New Brunswick",
+	PrinceEdwardIsland = "Prince Edward Island",
+	Quebec = "Quebec",
+	NewfoundlandAndLabrador = "Newfoundland and Labrador",
+	BritishColumbia = "British Columbia"
+}
 export class DataHelper {
 	static startYear: number = 1990;
 	static endYear: number = 2018;
@@ -38,13 +47,13 @@ export class DataHelper {
 		"Cockles"
 	].sort();
 
-	static provinces: string[] = [
-		"Nova Scotia",
-		"New Brunswick",
-		"Prince Edward Island",
-		"Quebec",
-		"Newfoundland and Labrador",
-		"British Columbia"
+	static provinces: ProvincesEnum[] = [
+		ProvincesEnum.NovaScotia,
+		ProvincesEnum.NewBrunswick,
+		ProvincesEnum.PrinceEdwardIsland,
+		ProvincesEnum.Quebec,
+		ProvincesEnum.NewfoundlandAndLabrador,
+		ProvincesEnum.BritishColumbia
 	].sort();
 
 	static years: string[] = [...Array(28).keys()].map(i => (1990 + i).toString());

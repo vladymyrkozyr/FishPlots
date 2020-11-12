@@ -1,11 +1,8 @@
-import { Component, OnInit } from "@angular/core";
-import * as am4core from "@amcharts/amcharts4/core";
-import * as am4charts from "@amcharts/amcharts4/charts";
-import am4themes_animated from "@amcharts/amcharts4/themes/animated";
+import { Component, OnInit, ViewChild } from "@angular/core";
 import { DataService } from "src/app/services/data.service";
 import { forkJoin } from "rxjs";
-import { DataHelper } from 'src/app/helpers/data.hepler';
-am4core.useTheme(am4themes_animated);
+import { DataHelper, ProvincesEnum } from "src/app/helpers/data.hepler";
+import { SummaryLineChartComponent } from "../charts/summary-line-chart/summary-line-chart.component";
 
 @Component({
 	selector: "main-page",
@@ -15,11 +12,11 @@ am4core.useTheme(am4themes_animated);
 export class MainPageComponent implements OnInit {
 
 	fishTypes: string[] = DataHelper.fishTypes;
-	provinces: string[] = DataHelper.provinces;
+	provinces: ProvincesEnum[] = DataHelper.provinces;
 	years: string[] = DataHelper.years;
 
-	fishTypesSelected: string[] = [...this.fishTypes];
-	provincesSelected: string[] = [];
+	fishTypesSelected: string[] = DataHelper.fishTypes;
+	provincesSelected: ProvincesEnum[] = DataHelper.provinces;
 	yearsSelected: string[] = [];
 
 	isFishTypeSelected = (item: string): boolean => {
@@ -48,7 +45,10 @@ export class MainPageComponent implements OnInit {
 
 	dataQuantities = {};
 	dataValues = {};
-	summarizedDataByYearsAndProvinces = {};
+
+	summaryLineChartData: any[];
+
+	@ViewChild("summaryLineChart") summaryLineChart: SummaryLineChartComponent;
 
 	constructor(
 		private dataService: DataService
@@ -72,26 +72,30 @@ export class MainPageComponent implements OnInit {
 			console.log(DataHelper.yearsAmount)
 
 			for (let i: number = 0; i <= DataHelper.yearsAmount; i++) {
-				console.log(i);
-				this.dataQuantities[i + DataHelper.startYear] = files[i].map(d => <any>{
-					fishType: d["Species"],
-					"Nova Scotia": this.parseStringValue(d["Nova Scotia"]),
-					"New Brunswick": this.parseStringValue(d["New Brunswick"]),
-					"Prince Edward Island": this.parseStringValue(d["Prince Edward Island"]),
-					"Quebec": this.parseStringValue(d["Quebec"]),
-					"Newfoundland and Labrador": this.parseStringValue(d["Newfoundland and Labrador"]),
-					"British Columbia": this.parseStringValue(d["Nova Scotia"])
-				}).filter(d => d.fishType != "");
 
-				this.dataValues[i + DataHelper.startYear] = files[i + DataHelper.yearsAmount + 1].map(d => <any>{
-					fishType: d["Species"],
-					"Nova Scotia": this.parseStringValue(d["Nova Scotia"]),
-					"New Brunswick": this.parseStringValue(d["New Brunswick"]),
-					"Prince Edward Island": this.parseStringValue(d["Prince Edward Island"]),
-					"Quebec": this.parseStringValue(d["Quebec"]),
-					"Newfoundland and Labrador": this.parseStringValue(d["Newfoundland and Labrador"]),
-					"British Columbia": this.parseStringValue(d["Nova Scotia"])
-				}).filter(d => d.fishType != "");
+				this.dataQuantities[i + DataHelper.startYear] = files[i].map(fq => {
+					let q: any = {};
+					q.fishType = fq["Species"];
+					q[ProvincesEnum.NovaScotia] = this.parseStringValue(fq[ProvincesEnum.NovaScotia]);
+					q[ProvincesEnum.NewBrunswick] = this.parseStringValue(fq[ProvincesEnum.NewBrunswick]);
+					q[ProvincesEnum.PrinceEdwardIsland] = this.parseStringValue(fq[ProvincesEnum.PrinceEdwardIsland]);
+					q[ProvincesEnum.Quebec] = this.parseStringValue(fq[ProvincesEnum.Quebec]);
+					q[ProvincesEnum.NewfoundlandAndLabrador] = this.parseStringValue(fq[ProvincesEnum.NewfoundlandAndLabrador]);
+					q[ProvincesEnum.BritishColumbia] = this.parseStringValue(fq[ProvincesEnum.BritishColumbia]);
+					return q;
+				});
+
+				this.dataValues[i + DataHelper.startYear] = files[i + DataHelper.yearsAmount + 1].map(fv => {
+					let v: any = {};
+					v.fishType = fv["Species"];
+					v[ProvincesEnum.NovaScotia] = this.parseStringValue(fv[ProvincesEnum.NovaScotia]);
+					v[ProvincesEnum.NewBrunswick] = this.parseStringValue(fv[ProvincesEnum.NewBrunswick]);
+					v[ProvincesEnum.PrinceEdwardIsland] = this.parseStringValue(fv[ProvincesEnum.PrinceEdwardIsland]);
+					v[ProvincesEnum.Quebec] = this.parseStringValue(fv[ProvincesEnum.Quebec]);
+					v[ProvincesEnum.NewfoundlandAndLabrador] = this.parseStringValue(fv[ProvincesEnum.NewfoundlandAndLabrador]);
+					v[ProvincesEnum.BritishColumbia] = this.parseStringValue(fv[ProvincesEnum.BritishColumbia]);
+					return v;
+				});
 			}
 
 			console.log(this.dataQuantities);
@@ -106,81 +110,18 @@ export class MainPageComponent implements OnInit {
 	}
 
 	lineChartSummarizedByProvinces() {
-		let data = [];
+		this.summaryLineChartData = [];
 		for (let i: number = DataHelper.startYear; i <= DataHelper.endYear; i++) {
-			console.log(this.dataQuantities[i]);
-			// console.log(this.dataQuantities[i].reduce((sum, current) => sum + current["British Columbia"], 0))
-			data.push({
-				year: i.toString(),
+			let d: any = {};
+			d.year = i.toString();
+			this.provincesSelected.forEach(p => {
+				d[`${p} Quantities`] = this.dataQuantities[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current[p], 0);
+				d[`${p} Values`] = this.dataValues[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current[p], 0);
+			});
 
-				//  this.provinces.map(p=><any>{
-
-				//  })
-
-				value1: this.dataQuantities[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current["British Columbia"], 0),
-				value2: this.dataQuantities[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current["Quebec"], 0)
-
-			})
+			this.summaryLineChartData.push(d);
 		}
-
-		let chart = am4core.create("chartdiv", am4charts.XYChart);
-		chart.data = data;
-
-		let categoryAxis = chart.xAxes.push(new am4charts.CategoryAxis());
-		categoryAxis.dataFields.category = "year";
-		categoryAxis.renderer.minGridDistance = 50;
-		categoryAxis.renderer.grid.template.location = 0.5;
-		categoryAxis.startLocation = 0.5;
-		categoryAxis.endLocation = 0.5;
-
-		// Create value axis
-		let valueAxis = chart.yAxes.push(new am4charts.ValueAxis());
-		valueAxis.baseValue = 0;
-
-		// Create series
-		let series1 = chart.series.push(new am4charts.LineSeries());
-		series1.dataFields.valueY = "value1";
-		series1.dataFields.categoryX = "year";
-		series1.strokeWidth = 2;
-		series1.name = "British Columbia";
-
-		let series2 = chart.series.push(new am4charts.LineSeries());
-		series2.dataFields.valueY = "value2";
-		series2.dataFields.categoryX = "year";
-		series2.strokeWidth = 2;
-		series2.name = "Quebec";
-
-
-
-		//series.tensionX = 0.77;
-
-		// bullet is added because we add tooltip to a bullet for it to change color
-		// let bullet = series.bullets.push(new am4charts.Bullet());
-		// bullet.tooltipText = "{valueY}";
-
-		// bullet.adapter.add("fill", function (fill, target) {
-		// 	if (target.dataItem.valueY < 0) {
-		// 		return am4core.color("#FF0000");
-		// 	}
-		// 	return fill;
-		// })
-		// let range = valueAxis.createSeriesRange(series);
-		// range.value = 0;
-		// range.endValue = -1000;
-		// range.contents.stroke = am4core.color("#FF0000");
-		// range.contents.fill = range.contents.stroke;
-
-		// Add scrollbar
-		var scrollbarX = new am4charts.XYChartScrollbar();
-		scrollbarX.series.push(series1);
-		scrollbarX.series.push(series2);
-		chart.scrollbarX = scrollbarX;
-
-		chart.legend = new am4charts.Legend();
-
-		chart.legend.position = "top";
-
-		chart.cursor = new am4charts.XYCursor();
+		this.summaryLineChart.renderChart(this.summaryLineChartData, this.provincesSelected);
 	}
 
 }

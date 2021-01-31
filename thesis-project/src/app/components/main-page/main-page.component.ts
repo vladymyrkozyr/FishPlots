@@ -11,13 +11,16 @@ import { SummaryLineChartComponent } from "../charts/summary-line-chart/summary-
 })
 export class MainPageComponent implements OnInit {
 
+	startYear: number = DataHelper.startYear;
+	endYear: number = DataHelper.endYear;
+
 	fishTypes: string[] = DataHelper.fishTypes;
 	provinces: ProvincesEnum[] = DataHelper.provinces;
 	years: string[] = DataHelper.years;
 
 	fishTypesSelected: string[] = DataHelper.fishTypes;
 	provincesSelected: ProvincesEnum[] = DataHelper.provinces;
-	yearsSelected: string[] = [];
+	yearsRange: [number, number] = [this.startYear, this.endYear];
 
 	isFishTypeSelected = (item: string): boolean => {
 		return this.fishTypesSelected.some(fishType => fishType == item);
@@ -32,14 +35,6 @@ export class MainPageComponent implements OnInit {
 	}
 
 	onProvincesChange(event: string) {
-		console.log(event);
-	}
-
-	isYearSelected = (item: string): boolean => {
-		return this.yearsSelected.some(year => year == item);
-	}
-
-	onYearsChange(event: string) {
 		console.log(event);
 	}
 
@@ -61,7 +56,7 @@ export class MainPageComponent implements OnInit {
 		let fileRequestsQuantities = [];
 		let fileRequestsValues = [];
 
-		for (let i: number = DataHelper.startYear; i <= DataHelper.endYear; i++) {
+		for (let i: number = this.startYear; i <= this.endYear; i++) {
 			fileRequestsQuantities.push(this.dataService.getFileByUrl(`assets/files/json/sea fish quantities/s${i}pq_e.json`));
 			fileRequestsValues.push(this.dataService.getFileByUrl(`assets/files/json/sea fish values/s${i}pv_e.json`));
 		}
@@ -73,7 +68,7 @@ export class MainPageComponent implements OnInit {
 
 			for (let i: number = 0; i <= DataHelper.yearsAmount; i++) {
 
-				this.dataQuantities[i + DataHelper.startYear] = files[i].map(fq => {
+				this.dataQuantities[i + this.startYear] = files[i].map(fq => {
 					let q: any = {};
 					q.fishType = fq["Species"];
 					q[ProvincesEnum.NovaScotia] = this.parseStringValue(fq[ProvincesEnum.NovaScotia]);
@@ -85,7 +80,7 @@ export class MainPageComponent implements OnInit {
 					return q;
 				});
 
-				this.dataValues[i + DataHelper.startYear] = files[i + DataHelper.yearsAmount + 1].map(fv => {
+				this.dataValues[i + this.startYear] = files[i + DataHelper.yearsAmount + 1].map(fv => {
 					let v: any = {};
 					v.fishType = fv["Species"];
 					v[ProvincesEnum.NovaScotia] = this.parseStringValue(fv[ProvincesEnum.NovaScotia]);
@@ -111,7 +106,7 @@ export class MainPageComponent implements OnInit {
 
 	lineChartSummarizedByProvinces() {
 		this.summaryLineChartData = [];
-		for (let i: number = DataHelper.startYear; i <= DataHelper.endYear; i++) {
+		for (let i: number = this.yearsRange[0]; i <= this.yearsRange[1]; i++) {
 			let d: any = {};
 			d.year = i.toString();
 			this.provincesSelected.forEach(p => {

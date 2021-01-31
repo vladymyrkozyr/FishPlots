@@ -1,18 +1,12 @@
 <div class="d-flex d-flex-row justify-content-space-around">
-	<div class="col-md-4">
+	<div class="col-md-4 pl-4">
 		<kendo-floatinglabel [text]="'Years'">
-			<kendo-multiselect [data]="years"
-							   [(value)]="yearsSelected"
-							   (valueChange)="onYearsChange($event)"
-							   [autoClose]="false">
-				<ng-template kendoMultiSelectItemTemplate
-							 let-dataItem>
-					<input type="checkbox"
-						   class="k-checkbox"
-						   [checked]="isYearSelected(dataItem)">
-					<label class="k-checkbox-label">{{ dataItem }}</label>
-				</ng-template>
-			</kendo-multiselect>
+			<kendo-rangeslider [(value)]="yearsRange"
+						  	   [min]="startYear"
+						       [max]="endYear"
+							   [smallStep]="1"
+							   [largeStep]="2">
+			</kendo-rangeslider>
 		</kendo-floatinglabel>
 	</div>
 	<div class="col-md-4">

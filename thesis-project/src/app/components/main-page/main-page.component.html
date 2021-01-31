@@ -50,4 +50,25 @@
 		Get Data
 	</button>
 </div>
-<summary-line-chart #summaryLineChart></summary-line-chart>
+<kendo-tabstrip [keepTabContent]="true">
+	<kendo-tabstrip-tab [title]="'Problem 1 (Line Chart)'" [selected]="true">
+	  <ng-template kendoTabContent>
+			<summary-line-chart #summaryLineChart></summary-line-chart>
+	  </ng-template>
+	</kendo-tabstrip-tab>
+	<kendo-tabstrip-tab [title]="'Problem 2 (Scatter Plot)'">
+		<ng-template kendoTabContent>
+			  Scatter Plot
+		</ng-template>
+	  </kendo-tabstrip-tab>
+	  <kendo-tabstrip-tab [title]="'Problem 3 (Bar Chart)'">
+		<ng-template kendoTabContent>
+			  Bar Chart
+		</ng-template>
+	  </kendo-tabstrip-tab>
+	  <kendo-tabstrip-tab [title]="'Problem 4 (Pie Chart)'">
+		<ng-template kendoTabContent>
+			  Pie Chart
+		</ng-template>
+	  </kendo-tabstrip-tab>
+</kendo-tabstrip>

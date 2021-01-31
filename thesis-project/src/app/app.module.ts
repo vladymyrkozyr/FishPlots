@@ -16,6 +16,7 @@ import { LabelModule } from "@progress/kendo-angular-label";
 import { MainPageComponent } from "./components/main-page/main-page.component";
 import { SummaryLineChartComponent } from "./components/charts/summary-line-chart/summary-line-chart.component";
 import { InputsModule } from "@progress/kendo-angular-inputs";
+import { LayoutModule } from "@progress/kendo-angular-layout";
 
 @NgModule({
 	declarations: [
@@ -32,7 +33,8 @@ import { InputsModule } from "@progress/kendo-angular-inputs";
 		ButtonsModule,
 		DropDownsModule,
 		LabelModule,
-		InputsModule
+		InputsModule,
+		LayoutModule
 	],
 	providers: [HttpClient, DataService],
 	bootstrap: [AppComponent]

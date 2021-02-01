@@ -4,6 +4,7 @@ import { forkJoin } from "rxjs";
 import { DataHelper, ProvincesEnum } from "src/app/helpers/data.hepler";
 import { SummaryLineChartComponent } from "../charts/summary-line-chart/summary-line-chart.component";
 import { SummaryScatterPlotComponent } from "../charts/summary-scatter-plot/summary-scatter-plot.component";
+import { SummaryBarChartComponent } from "../charts/summary-bar-chart/summary-bar-chart.component";
 
 @Component({
 	selector: "main-page",
@@ -46,6 +47,8 @@ export class MainPageComponent implements OnInit {
 
 	@ViewChild("summaryLineChart") summaryLineChart: SummaryLineChartComponent;
 	@ViewChild("summaryScatterPlot") summaryScatterPlot: SummaryScatterPlotComponent;
+	@ViewChild("summaryBarChart") summaryBarChart: SummaryBarChartComponent;
+
 
 	constructor(
 		private dataService: DataService
@@ -98,8 +101,9 @@ export class MainPageComponent implements OnInit {
 			console.log(this.dataQuantities);
 			console.log(this.dataValues);
 
-			this.lineChartSummarizedByProvinces();
-			this.scatterPlot();
+			this.renderSummaryLineChart();
+			this.renderScatterPlot();
+			this.renderSummaryBarChart();
 		});
 	}
 
@@ -107,7 +111,7 @@ export class MainPageComponent implements OnInit {
 		return DataHelper.parseStringValue(value);
 	}
 
-	lineChartSummarizedByProvinces() {
+	renderSummaryLineChart() {
 		this.summaryLineChartData = [];
 		for (let i: number = this.yearsRange[0]; i <= this.yearsRange[1]; i++) {
 			let d: any = {};
@@ -122,8 +126,12 @@ export class MainPageComponent implements OnInit {
 		this.summaryLineChart.renderChart(this.summaryLineChartData, this.provincesSelected);
 	}
 
-	scatterPlot() {
+	renderScatterPlot() {
 		this.summaryScatterPlot.renderChart();
+	}
+
+	renderSummaryBarChart() {
+		this.summaryBarChart.renderChart();
 	}
 
 }

@@ -5,6 +5,7 @@ import { DataHelper, ProvincesEnum } from "src/app/helpers/data.hepler";
 import { SummaryLineChartComponent } from "../charts/summary-line-chart/summary-line-chart.component";
 import { SummaryScatterPlotComponent } from "../charts/summary-scatter-plot/summary-scatter-plot.component";
 import { SummaryBarChartComponent } from "../charts/summary-bar-chart/summary-bar-chart.component";
+import { SummaryPieChartComponent } from "../charts/summary-pie-chart/summary-pie-chart.component";
 
 @Component({
 	selector: "main-page",
@@ -48,6 +49,7 @@ export class MainPageComponent implements OnInit {
 	@ViewChild("summaryLineChart") summaryLineChart: SummaryLineChartComponent;
 	@ViewChild("summaryScatterPlot") summaryScatterPlot: SummaryScatterPlotComponent;
 	@ViewChild("summaryBarChart") summaryBarChart: SummaryBarChartComponent;
+	@ViewChild("summaryPieChart") summaryPieChart: SummaryPieChartComponent;
 
 
 	constructor(
@@ -104,6 +106,7 @@ export class MainPageComponent implements OnInit {
 			this.renderSummaryLineChart();
 			this.renderScatterPlot();
 			this.renderSummaryBarChart();
+			this.renderPieChart();
 		});
 	}
 
@@ -132,6 +135,10 @@ export class MainPageComponent implements OnInit {
 
 	renderSummaryBarChart() {
 		this.summaryBarChart.renderChart();
+	}
+
+	renderPieChart() {
+		this.summaryPieChart.renderChart();
 	}
 
 }

@@ -3,6 +3,7 @@ import { DataService } from "src/app/services/data.service";
 import { forkJoin } from "rxjs";
 import { DataHelper, ProvincesEnum } from "src/app/helpers/data.hepler";
 import { SummaryLineChartComponent } from "../charts/summary-line-chart/summary-line-chart.component";
+import { SummaryScatterPlotComponent } from "../charts/summary-scatter-plot/summary-scatter-plot.component";
 
 @Component({
 	selector: "main-page",
@@ -44,6 +45,7 @@ export class MainPageComponent implements OnInit {
 	summaryLineChartData: any[];
 
 	@ViewChild("summaryLineChart") summaryLineChart: SummaryLineChartComponent;
+	@ViewChild("summaryScatterPlot") summaryScatterPlot: SummaryScatterPlotComponent;
 
 	constructor(
 		private dataService: DataService
@@ -97,6 +99,7 @@ export class MainPageComponent implements OnInit {
 			console.log(this.dataValues);
 
 			this.lineChartSummarizedByProvinces();
+			this.scatterPlot();
 		});
 	}
 
@@ -117,6 +120,10 @@ export class MainPageComponent implements OnInit {
 			this.summaryLineChartData.push(d);
 		}
 		this.summaryLineChart.renderChart(this.summaryLineChartData, this.provincesSelected);
+	}
+
+	scatterPlot() {
+		this.summaryScatterPlot.renderChart();
 	}
 
 }

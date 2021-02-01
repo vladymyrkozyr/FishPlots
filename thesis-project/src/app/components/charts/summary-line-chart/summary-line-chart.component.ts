@@ -1,4 +1,4 @@
-import { Component, Input, OnDestroy, OnInit } from "@angular/core";
+import { Component } from "@angular/core";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 //import am4themes_animated from "@amcharts/amcharts4/themes/animated";
@@ -11,7 +11,7 @@ import { ChartBase } from "../chart-base";
 	templateUrl: "./summary-line-chart.component.html"
 })
 export class SummaryLineChartComponent extends ChartBase {
-	
+
 	constructor() { 
 		super();
 	}
@@ -35,7 +35,7 @@ export class SummaryLineChartComponent extends ChartBase {
 		valueAxisValues.renderer.opposite = true;
 
 		// Add scrollbar
-		var scrollbarX = new am4charts.XYChartScrollbar();
+		let scrollbarX = new am4charts.XYChartScrollbar();
 
 		// Create series
 		provincesSelected.forEach(p => {

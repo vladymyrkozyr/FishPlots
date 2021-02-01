@@ -3,24 +3,18 @@ import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
 //import am4themes_animated from "@amcharts/amcharts4/themes/animated";
 import { ProvincesEnum } from "src/app/helpers/data.hepler";
+import { ChartBase } from "../chart-base";
 //am4core.useTheme(am4themes_animated);
 
 @Component({
 	selector: "summary-line-chart",
-	templateUrl: "./summary-line-chart.component.html",
-	styleUrls: ["./summary-line-chart.component.scss"]
+	templateUrl: "./summary-line-chart.component.html"
 })
-export class SummaryLineChartComponent implements OnInit, OnDestroy {
-
-	chart: am4charts.XYChart;
-
-	constructor() { }
-
-	ngOnInit() { }
-	ngOnDestroy() {
-		this.chart?.dispose();
+export class SummaryLineChartComponent extends ChartBase {
+	
+	constructor() { 
+		super();
 	}
-
 
 	renderChart(data: any[], provincesSelected: ProvincesEnum[]) {
 		this.chart = am4core.create("summary-line-chart", am4charts.XYChart);

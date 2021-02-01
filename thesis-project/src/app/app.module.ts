@@ -17,12 +17,14 @@ import { MainPageComponent } from "./components/main-page/main-page.component";
 import { SummaryLineChartComponent } from "./components/charts/summary-line-chart/summary-line-chart.component";
 import { InputsModule } from "@progress/kendo-angular-inputs";
 import { LayoutModule } from "@progress/kendo-angular-layout";
+import { SummaryScatterPlotComponent } from "./components/charts/summary-scatter-plot/summary-scatter-plot.component";
 
 @NgModule({
 	declarations: [
 		AppComponent,
 		MainPageComponent,
-		SummaryLineChartComponent
+		SummaryLineChartComponent,
+		SummaryScatterPlotComponent
 	],
 	imports: [
 		BrowserModule,

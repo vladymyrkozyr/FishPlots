@@ -21,8 +21,8 @@ export class MainPageComponent implements OnInit {
 	provinces: ProvincesEnum[] = DataHelper.provinces;
 	years: string[] = DataHelper.years;
 
-	fishTypesSelected: string[] = DataHelper.fishTypes;
-	provincesSelected: ProvincesEnum[] = DataHelper.provinces;
+	fishTypesSelected: string[] = DataHelper.fishTypesDefaultSelection;
+	provincesSelected: ProvincesEnum[] = DataHelper.provincesDefaultSelection;
 	yearsRange: [number, number] = [this.startYear, this.endYear];
 
 	isFishTypeSelected = (item: string): boolean => {

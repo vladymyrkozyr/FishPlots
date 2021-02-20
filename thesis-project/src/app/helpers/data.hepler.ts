@@ -47,12 +47,29 @@ export class DataHelper {
 		"Cockles"
 	].sort();
 
+	static fishTypesDefaultSelection: string[] = [
+		"Cod",
+		"Hake",
+		"Eel",
+		"Salmon",
+		"Shark",
+		"Oyster",
+		"Shrimp",
+		"Squid"
+	].sort();
+
 	static provinces: ProvincesEnum[] = [
 		ProvincesEnum.NovaScotia,
 		ProvincesEnum.NewBrunswick,
 		ProvincesEnum.PrinceEdwardIsland,
 		ProvincesEnum.Quebec,
 		ProvincesEnum.NewfoundlandAndLabrador,
+		ProvincesEnum.BritishColumbia
+	].sort();
+
+	static provincesDefaultSelection: ProvincesEnum[] = [
+		ProvincesEnum.NovaScotia,
+		ProvincesEnum.Quebec,
 		ProvincesEnum.BritishColumbia
 	].sort();
 

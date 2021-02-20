@@ -41,12 +41,16 @@ export class MainPageComponent implements OnInit {
 		console.log(event);
 	}
 
-	dataQuantities = {};
-	dataValues = {};
+	dataQuantities: any = {};
+	dataValues: any = {};
 
 	summaryLineChartData: any[];
 
+	summaryPieChartData: any = {};
+
 	@ViewChild("summaryLineChart") summaryLineChart: SummaryLineChartComponent;
+
+
 	@ViewChild("summaryScatterPlot") summaryScatterPlot: SummaryScatterPlotComponent;
 	@ViewChild("summaryBarChart") summaryBarChart: SummaryBarChartComponent;
 	@ViewChild("summaryPieChart") summaryPieChart: SummaryPieChartComponent;
@@ -60,8 +64,8 @@ export class MainPageComponent implements OnInit {
 
 	getData() {
 
-		let fileRequestsQuantities = [];
-		let fileRequestsValues = [];
+		let fileRequestsQuantities: any[] = [];
+		let fileRequestsValues: any[] = [];
 
 		for (let i: number = this.startYear; i <= this.endYear; i++) {
 			fileRequestsQuantities.push(this.dataService.getFileByUrl(`assets/files/json/sea fish quantities/s${i}pq_e.json`));
@@ -69,9 +73,6 @@ export class MainPageComponent implements OnInit {
 		}
 
 		forkJoin([...fileRequestsQuantities, ...fileRequestsValues]).subscribe((files: any[]) => {
-
-			console.log(files)
-			console.log(DataHelper.yearsAmount)
 
 			for (let i: number = 0; i <= DataHelper.yearsAmount; i++) {
 
@@ -99,9 +100,6 @@ export class MainPageComponent implements OnInit {
 					return v;
 				});
 			}
-
-			console.log(this.dataQuantities);
-			console.log(this.dataValues);
 
 			this.renderSummaryLineChart();
 			this.renderScatterPlot();
@@ -138,7 +136,33 @@ export class MainPageComponent implements OnInit {
 	}
 
 	renderPieChart() {
-		this.summaryPieChart.renderChart();
+		this.summaryPieChartData = [];
+		let year: string = this.yearsRange[0].toString();
+		
+		let q: any[] = this.dataQuantities[year];
+		let v: any[] = this.dataValues[year];
+
+		q = q.filter(d => this.fishTypesSelected.includes(d.fishType));
+		v = v.filter(d => this.fishTypesSelected.includes(d.fishType));
+
+		let quantities: any[] = [];
+		q.forEach(d => {
+			let sum: number = 0;
+			this.provincesSelected.forEach(p => sum += d[p]);
+			quantities.push({ fishType: d.fishType, quantity: sum });
+		});
+
+		let values: any[] = [];
+		v.forEach(d => {
+			let sum: number = 0;
+			this.provincesSelected.forEach(p => sum += d[p]);
+			values.push({ fishType: d.fishType, value: sum });
+		});
+
+		this.summaryPieChartData.quantities = quantities;
+		this.summaryPieChartData.values = values;
+
+		this.summaryPieChart.renderChart(this.summaryPieChartData);
 	}
 
 }

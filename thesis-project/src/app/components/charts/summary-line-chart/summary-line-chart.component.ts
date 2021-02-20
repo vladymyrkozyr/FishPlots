@@ -51,8 +51,6 @@ export class SummaryLineChartComponent extends ChartBase {
 		this.chart.cursor = new am4charts.XYCursor();
 
 		this.chart.data = data;
-
-		console.log(this.chart.data);
 	}
 
 	createSeries(province: ProvincesEnum, type: "Quantities" | "Values", units: string, valueAxis: am4charts.ValueAxis): am4charts.LineSeries {

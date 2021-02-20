@@ -17,12 +17,12 @@ export class SummaryPieChartComponent extends ChartBase {
 		super();
 	}
 
-	renderChart(data: any) {
-		this.renderChartQuantities(data.quantities);
-		this.renderChartValues(data.values);
+	renderChart(data: any, year: string) {
+		this.renderChartQuantities(data.quantities, year);
+		this.renderChartValues(data.values, year);
 	}
 
-	renderChartQuantities(data: any[]) {
+	renderChartQuantities(data: any[], year: string) {
 		// Create chart instance
 		this.chartQuantities = am4core.create("summary-pie-chart-quantities", am4charts.PieChart);
 
@@ -52,11 +52,11 @@ export class SummaryPieChartComponent extends ChartBase {
 		this.chartQuantities.legend.position = "top";
 
 		let title = this.chartQuantities.titles.create();
-		title.text = "Quantities";
+		title.text = `Quantities (${year})`;
 		title.fontSize = 25;
 	}
 
-	renderChartValues(data: any[]) {
+	renderChartValues(data: any[], year: string) {
 		// Create chart instance
 		this.chartValues = am4core.create("summary-pie-chart-values", am4charts.PieChart);
 
@@ -86,7 +86,7 @@ export class SummaryPieChartComponent extends ChartBase {
 		this.chartValues.legend.position = "top";
 
 		let title = this.chartValues.titles.create();
-		title.text = "Values";
+		title.text = `Values (${year})`;
 		title.fontSize = 25;
 	}
 

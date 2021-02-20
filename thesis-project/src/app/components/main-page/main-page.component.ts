@@ -137,7 +137,7 @@ export class MainPageComponent implements OnInit {
 
 	renderPieChart() {
 		this.summaryPieChartData = [];
-		let year: string = this.yearsRange[0].toString();
+		let year: string = this.yearsRange[1].toString();
 		
 		let q: any[] = this.dataQuantities[year];
 		let v: any[] = this.dataValues[year];
@@ -162,7 +162,7 @@ export class MainPageComponent implements OnInit {
 		this.summaryPieChartData.quantities = quantities;
 		this.summaryPieChartData.values = values;
 
-		this.summaryPieChart.renderChart(this.summaryPieChartData);
+		this.summaryPieChart.renderChart(this.summaryPieChartData, year);
 	}
 
 }

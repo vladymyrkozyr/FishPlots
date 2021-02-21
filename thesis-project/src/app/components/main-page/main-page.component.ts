@@ -44,13 +44,11 @@ export class MainPageComponent implements OnInit {
 	dataQuantities: any = {};
 	dataValues: any = {};
 
-	summaryLineChartData: any[];
-
+	summaryLineChartData: any[] = [];
 	summaryPieChartData: any = {};
+	summaryBarChartData: any[] = [];
 
 	@ViewChild("summaryLineChart") summaryLineChart: SummaryLineChartComponent;
-
-
 	@ViewChild("summaryScatterPlot") summaryScatterPlot: SummaryScatterPlotComponent;
 	@ViewChild("summaryBarChart") summaryBarChart: SummaryBarChartComponent;
 	@ViewChild("summaryPieChart") summaryPieChart: SummaryPieChartComponent;
@@ -112,32 +110,8 @@ export class MainPageComponent implements OnInit {
 		return DataHelper.parseStringValue(value);
 	}
 
-	renderSummaryLineChart() {
-		this.summaryLineChartData = [];
-		for (let i: number = this.yearsRange[0]; i <= this.yearsRange[1]; i++) {
-			let d: any = {};
-			d.year = i.toString();
-			this.provincesSelected.forEach(p => {
-				d[`${p} Quantities`] = this.dataQuantities[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current[p], 0);
-				d[`${p} Values`] = this.dataValues[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current[p], 0);
-			});
-
-			this.summaryLineChartData.push(d);
-		}
-		this.summaryLineChart.renderChart(this.summaryLineChartData, this.provincesSelected);
-	}
-
-	renderScatterPlot() {
-		this.summaryScatterPlot.renderChart();
-	}
-
-	renderSummaryBarChart() {
-		this.summaryBarChart.renderChart();
-	}
-
-	renderPieChart() {
-		this.summaryPieChartData = [];
-		let year: string = this.yearsRange[1].toString();
+	getQuantitiesAndValuesSummarizaedByFishTypeForYear(y: number): any {
+		let year: string = y.toString();
 		
 		let q: any[] = this.dataQuantities[year];
 		let v: any[] = this.dataValues[year];
@@ -159,10 +133,40 @@ export class MainPageComponent implements OnInit {
 			values.push({ fishType: d.fishType, value: sum });
 		});
 
-		this.summaryPieChartData.quantities = quantities;
-		this.summaryPieChartData.values = values;
+		return { quantities: quantities, values: values };
+	}
 
-		this.summaryPieChart.renderChart(this.summaryPieChartData, year);
+	renderSummaryLineChart() {
+		this.summaryLineChartData = [];
+		for (let i: number = this.yearsRange[0]; i <= this.yearsRange[1]; i++) {
+			let d: any = {};
+			d.year = i.toString();
+			this.provincesSelected.forEach(p => {
+				d[`${p} Quantities`] = this.dataQuantities[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current[p], 0);
+				d[`${p} Values`] = this.dataValues[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current[p], 0);
+			});
+
+			this.summaryLineChartData.push(d);
+		}
+		this.summaryLineChart.renderChart(this.summaryLineChartData, this.provincesSelected);
+	}
+
+	renderScatterPlot() {
+		this.summaryScatterPlot.renderChart();
+	}
+
+	renderSummaryBarChart() {
+		this.summaryBarChartData = [
+			{ year: this.yearsRange[0], ...this.getQuantitiesAndValuesSummarizaedByFishTypeForYear(this.yearsRange[0]) },
+			{ year: this.yearsRange[1], ...this.getQuantitiesAndValuesSummarizaedByFishTypeForYear(this.yearsRange[1]) }
+		];
+
+		this.summaryBarChart.renderChart(this.summaryBarChartData, this.fishTypesSelected);
+	}
+
+	renderPieChart() {
+		this.summaryPieChartData = this.getQuantitiesAndValuesSummarizaedByFishTypeForYear(this.yearsRange[1]);
+		this.summaryPieChart.renderChart(this.summaryPieChartData, this.yearsRange[1].toString());
 	}
 
 }

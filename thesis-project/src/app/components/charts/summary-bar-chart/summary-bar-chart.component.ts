@@ -13,32 +13,27 @@ export class SummaryBarChartComponent extends ChartBase {
 		super();
 	}
 
-	renderChart() {
+	renderChart(data: any[], fishTypes: string[]) {
 		// Create chart instance
 		this.chart = am4core.create("summary-bar-chart", am4charts.XYChart);
 
+		console.log(data);
+
+		let dataParsed: any[] = [];
+		data.forEach(d => {
+			let dataItem: any = {};
+			dataItem.year = d.year;
+			fishTypes.forEach(f => {
+				dataItem[`${f} Quantities`] = d.quantities?.find(e => e.fishType == f)?.quantity;
+				dataItem[`${f} Values`] = d.values?.find(e => e.fishType == f)?.value;
+			});
+			dataParsed.push(dataItem);
+		});
+
+		console.log(dataParsed)
+
 		// Add data
-		this.chart.data = [{
-			"year": 2005,
-			"income": 23.5,
-			"expenses": 18.1
-		}, {
-			"year": 2006,
-			"income": 26.2,
-			"expenses": 22.8
-		}, {
-			"year": 2007,
-			"income": 30.1,
-			"expenses": 23.9
-		}, {
-			"year": 2008,
-			"income": 29.5,
-			"expenses": 25.1
-		}, {
-			"year": 2009,
-			"income": 24.6,
-			"expenses": 25
-		}];
+		this.chart.data = dataParsed;
 
 		// Create axes
 		let categoryAxis = this.chart.yAxes.push(new am4charts.CategoryAxis());
@@ -49,38 +44,35 @@ export class SummaryBarChartComponent extends ChartBase {
 		categoryAxis.renderer.cellStartLocation = 0.1;
 		categoryAxis.renderer.cellEndLocation = 0.9;
 
-		let valueAxis = this.chart.xAxes.push(new am4charts.ValueAxis());
-		valueAxis.renderer.opposite = true;
+		let valueAxisQuantities: am4charts.ValueAxis = this.chart.xAxes.push(new am4charts.ValueAxis());
+		valueAxisQuantities.renderer.opposite = true;
 
+		let valueAxisValues = this.chart.xAxes.push(new am4charts.ValueAxis());
 
-		this.createSeries("income", "Income");
-		this.createSeries("expenses", "Expenses");
+		fishTypes.forEach(f => { 
+			this.createSeries(f, "Quantities", "tonn", valueAxisQuantities);
+			this.createSeries(f, "Values", "thousand $", valueAxisValues);
+		});
+
 	}
 
 	// Create series
-	createSeries(field: string, name: string) {
+	createSeries(field: string, type: "Quantities" | "Values", units: string, valueAxis: am4charts.ValueAxis) {
 		let series = this.chart.series.push(new am4charts.ColumnSeries());
-		series.dataFields.valueX = field;
+		series.dataFields.valueX = `${field} ${type}`;
 		series.dataFields.categoryY = "year";
-		series.name = name;
-		series.columns.template.tooltipText = "{name}: [bold]{valueX}[/]";
-		series.columns.template.height = am4core.percent(100);
+		series.xAxis = valueAxis;
+		series.name = field;
+		series.columns.template.tooltipText = `{name}: [bold]{valueX} (${units})[/]`;
+		//series.columns.template.height = am4core.percent(100);
 		series.sequencedInterpolation = true;
 
 		let valueLabel = series.bullets.push(new am4charts.LabelBullet());
-		valueLabel.label.text = "{valueX}";
+		valueLabel.label.text = `{name}: {valueX} (${units})`;
 		valueLabel.label.horizontalCenter = "left";
 		valueLabel.label.dx = 10;
 		valueLabel.label.hideOversized = false;
 		valueLabel.label.truncate = false;
-
-		let categoryLabel = series.bullets.push(new am4charts.LabelBullet());
-		categoryLabel.label.text = "{name}";
-		categoryLabel.label.horizontalCenter = "right";
-		categoryLabel.label.dx = -10;
-		categoryLabel.label.fill = am4core.color("#fff");
-		categoryLabel.label.hideOversized = false;
-		categoryLabel.label.truncate = false;
 	}
 
 }

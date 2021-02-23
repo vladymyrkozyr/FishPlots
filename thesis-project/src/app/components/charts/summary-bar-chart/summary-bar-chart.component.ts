@@ -57,6 +57,9 @@ export class SummaryBarChartComponent extends ChartBase {
 		valueAxis.renderer.ticks.template.length = 5;
 		valueAxis.renderer.ticks.template.disabled = false;
 		valueAxis.renderer.ticks.template.strokeOpacity = 0.4;
+		valueAxis.renderer.labels.template.rotation = -45;
+		valueAxis.renderer.labels.template.horizontalCenter = "right";
+		valueAxis.renderer.labels.template.verticalCenter = "middle";
 		
 		// Legend
 		this.chart1.legend = new am4charts.Legend();
@@ -106,6 +109,9 @@ export class SummaryBarChartComponent extends ChartBase {
 		valueAxis.renderer.ticks.template.length = 5;
 		valueAxis.renderer.ticks.template.disabled = false;
 		valueAxis.renderer.ticks.template.strokeOpacity = 0.4;
+		valueAxis.renderer.labels.template.rotation = -45;
+		valueAxis.renderer.labels.template.horizontalCenter = "right";
+		valueAxis.renderer.labels.template.verticalCenter = "middle";
 		
 		// Legend
 		this.chart2.legend = new am4charts.Legend();

@@ -153,24 +153,20 @@ export class MainPageComponent implements OnInit {
 	}
 
 	renderScatterPlot() {
-		// for (let i: number = this.yearsRange[0]; i <= this.yearsRange[1]; i++) {
-		// 	let d: any = {};
-		// 	d.year = i.toString();
-		// 	console.log(this.dataQuantities[i])
-		// 	this.fishTypesSelected.forEach(f => {
-		// 		let q: any = {};
-		// 		this.provincesSelected.forEach(p => {
-		// 			q[`${p} Quantities`]
-		// 		});
-		// 		d[`${f} Quantities`] = this.dataQuantities[i].filter(d => this.fishTypesSelected.includes(d.fishType)).reduce((sum, current) => sum + current[f], 0);
-		// 		d[`${f} Values`] = this.dataValues[i].filter(d => this.provincesSelected.includes(d.fishType)).reduce((sum, current) => sum + current[f], 0);
-		// 	});
+		this.summaryScatterPlotData = [];
+		for (let i: number = this.yearsRange[0]; i <= this.yearsRange[1]; i++) {
+			let d: any = {};
+			d.year = i.toString();
 
-		// 	this.summaryScatterPlotData.push(d);
-		// }
+			let dataItem = this.getQuantitiesAndValuesSummarizedByFishTypeForYear(i);
 
-		// console.log(this.summaryLineChartData);
-		this.summaryScatterPlot.renderChart();
+			dataItem.quantities.forEach(q => d[`${q.fishType} Quantity`] = q.quantity);
+			dataItem.values.forEach(v => d[`${v.fishType} Value`] = v.value);
+
+			this.summaryScatterPlotData.push(d);
+		}
+		console.log(this.summaryScatterPlotData);
+		this.summaryScatterPlot.renderChart(this.summaryScatterPlotData, this.fishTypesSelected);
 	}
 
 	renderSummaryBarChart() {

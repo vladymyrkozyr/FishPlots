@@ -13,7 +13,7 @@ export class SummaryScatterPlotComponent extends ChartBase {
 		super();
 	}
 
-	renderChart() {
+	renderChart(data: any[], fishTypes: string[]) {
 		this.chart = am4core.create("summary-scatter-plot", am4charts.XYChart);
 
 		// Add data

@@ -9,7 +9,7 @@ am4core.useTheme(am4themes_animated);
 	styleUrls: ["./app.component.scss"]
 })
 export class AppComponent {
-	title = "thesis-project";
+	title = "FishPlots";
 
 	constructor() { }
 

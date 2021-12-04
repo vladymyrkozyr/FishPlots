@@ -1,0 +1,74 @@
+<div class="d-flex d-flex-row justify-content-space-around">
+	<div class="col-md-4 pl-4">
+		<kendo-floatinglabel [text]="'Years'">
+			<kendo-rangeslider [(value)]="yearsRange"
+						  	   [min]="startYear"
+						       [max]="endYear"
+							   [smallStep]="1"
+							   [largeStep]="2">
+			</kendo-rangeslider>
+		</kendo-floatinglabel>
+	</div>
+	<div class="col-md-4">
+		<kendo-floatinglabel [text]="'Provinces'">
+			<kendo-multiselect [data]="provinces"
+							   [(value)]="provincesSelected"
+							   (valueChange)="onProvincesChange($event)"
+							   [autoClose]="false">
+				<ng-template kendoMultiSelectItemTemplate
+							 let-dataItem>
+					<input type="checkbox"
+						   class="k-checkbox"
+						   [checked]="isProvinceSelected(dataItem)">
+					<label class="k-checkbox-label">{{ dataItem }}</label>
+				</ng-template>
+			</kendo-multiselect>
+		</kendo-floatinglabel>
+	</div>
+	<div class="col-md-4">
+		<kendo-floatinglabel [text]="'Fish Types'">
+			<kendo-multiselect [data]="fishTypes"
+							   [(value)]="fishTypesSelected"
+							   (valueChange)="onFishTypesChange($event)"
+							   [autoClose]="false">
+				<ng-template kendoMultiSelectItemTemplate
+							 let-dataItem>
+					<input type="checkbox"
+						   class="k-checkbox"
+						   [checked]="isFishTypeSelected(dataItem)">
+					<label class="k-checkbox-label">{{ dataItem }}</label>
+				</ng-template>
+			</kendo-multiselect>
+		</kendo-floatinglabel>
+	</div>
+</div>
+
+<div class="d-flex d-flex-row justify-content-center mt-4">
+	<button kendoButton
+			[icon]="'refresh'"
+			(click)="getData()">
+		Get Data
+	</button>
+</div>
+<kendo-tabstrip [keepTabContent]="true">
+	<kendo-tabstrip-tab [title]="'Problem 1 (Line Chart)'" [selected]="true">
+	  <ng-template kendoTabContent>
+			<summary-line-chart #summaryLineChart></summary-line-chart>
+	  </ng-template>
+	</kendo-tabstrip-tab>
+	<kendo-tabstrip-tab [title]="'Problem 2 (Scatter Plot)'">
+		<ng-template kendoTabContent>
+			<summary-scatter-plot #summaryScatterPlot></summary-scatter-plot>
+		</ng-template>
+	  </kendo-tabstrip-tab>
+	  <kendo-tabstrip-tab [title]="'Problem 3 (Pie Chart)'">
+		<ng-template kendoTabContent>
+			<summary-pie-chart #summaryPieChart></summary-pie-chart>
+		</ng-template>
+	  </kendo-tabstrip-tab>
+	  <kendo-tabstrip-tab [title]="'Problem 4 (Bar Chart)'">
+		<ng-template kendoTabContent>
+			  <summary-bar-chart #summaryBarChart></summary-bar-chart>
+		</ng-template>
+	  </kendo-tabstrip-tab>
+</kendo-tabstrip>

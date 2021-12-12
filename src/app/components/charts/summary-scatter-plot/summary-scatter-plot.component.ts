@@ -44,7 +44,7 @@ export class SummaryScatterPlotComponent extends ChartBase {
 
 		this.chart.cursor = new am4charts.XYCursor();
 
-		this.chart.numberFormatter.numberFormat = "#";
+		this.chart.numberFormatter.numberFormat = "#,###";
 	}
 
 	createSeries(fishType: string) {
@@ -55,11 +55,13 @@ export class SummaryScatterPlotComponent extends ChartBase {
 		lineSeries.name = fishType;
 		//lineSeries.strokeOpacity = 0;
 
+		lineSeries.strokeWidth = 4;
+
 		// Add a bullet
 		let bullet = lineSeries.bullets.push(new am4charts.LabelBullet());
 		bullet.label.text = "{year}";
-		bullet.label.fontSize = 10;
-		bullet.label.dy = -10;
+		bullet.label.fontSize = 15;
+		bullet.label.dy = -15;
 
 		// Add a triangle to act as am arrow
 		let arrow = bullet.createChild(am4core.Triangle);
@@ -68,8 +70,8 @@ export class SummaryScatterPlotComponent extends ChartBase {
 		arrow.rotation = 180;
 		arrow.strokeWidth = 0;
 		arrow.direction = "top";
-		arrow.width = 12;
-		arrow.height = 12;
+		arrow.width = 15;
+		arrow.height = 15;
 	}
 
 }

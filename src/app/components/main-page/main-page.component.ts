@@ -30,7 +30,6 @@ export class MainPageComponent implements OnInit {
 	}
 
 	onFishTypesChange(event: string) {
-		console.log(event);
 	}
 
 	isProvinceSelected = (item: string): boolean => {
@@ -38,7 +37,6 @@ export class MainPageComponent implements OnInit {
 	}
 
 	onProvincesChange(event: string) {
-		console.log(event);
 	}
 
 	dataQuantities: any = {};
@@ -165,7 +163,6 @@ export class MainPageComponent implements OnInit {
 
 			this.summaryScatterPlotData.push(d);
 		}
-		console.log(this.summaryScatterPlotData);
 		this.summaryScatterPlot.renderChart(this.summaryScatterPlotData, this.fishTypesSelected);
 	}
 

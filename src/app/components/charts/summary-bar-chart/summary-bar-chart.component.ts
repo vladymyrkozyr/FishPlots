@@ -36,7 +36,6 @@ export class SummaryBarChartComponent extends ChartBase {
 
 		 // Add data
 		this.chart1.data = dataParsed;
-		console.log(dataParsed)
 
 		let title = this.chart1.titles.push(new am4core.Label());
 		title.text = data.year;
@@ -66,7 +65,7 @@ export class SummaryBarChartComponent extends ChartBase {
 		this.chart1.legend.position = "top";
 
 		// Use only absolute numbers
-		this.chart1.numberFormatter.numberFormat = "#.#s";
+		this.chart1.numberFormatter.numberFormat = "#s";
 
 		// Create series
 
@@ -118,7 +117,7 @@ export class SummaryBarChartComponent extends ChartBase {
 		this.chart2.legend.position = "top";
 
 		// Use only absolute numbers
-		this.chart2.numberFormatter.numberFormat = "#.#s";
+		this.chart2.numberFormatter.numberFormat = "#s";
 
 		// Create series
 

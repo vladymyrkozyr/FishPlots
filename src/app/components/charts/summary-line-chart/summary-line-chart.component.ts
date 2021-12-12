@@ -1,7 +1,7 @@
 import { Component } from "@angular/core";
 import * as am4core from "@amcharts/amcharts4/core";
 import * as am4charts from "@amcharts/amcharts4/charts";
-import { ProvincesEnum } from "src/app/helpers/data.hepler";
+import { DataHelper, ProvincesEnum } from "src/app/helpers/data.hepler";
 import { ChartBase } from "../chart-base";
 
 @Component({
@@ -57,10 +57,16 @@ export class SummaryLineChartComponent extends ChartBase {
 		let series: am4charts.LineSeries = this.chart.series.push(new am4charts.LineSeries());
 		series.dataFields.valueY = `${province} ${type}`;
 		series.dataFields.categoryX = "year";
-		series.strokeWidth = 2;
+		series.strokeWidth = 4;
+		
+		series.stroke = am4core.color(DataHelper.provincesColors.get(province)[type]);
+
 		series.name = `${province} (${units})`;
 		series.yAxis = valueAxis;
 		series.tooltipHTML = `<b>{name}: {valueY}</b>`;
+			
+		series.tooltip.getFillFromObject = false;
+		series.tooltip.background.fill = am4core.color(DataHelper.provincesColors.get(province)[type]);
 		return series;
 	}
 

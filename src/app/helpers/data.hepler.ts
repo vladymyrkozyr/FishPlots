@@ -58,6 +58,18 @@ export class DataHelper {
 		"Squid"
 	].sort();
 
+	static provincesColors: Map<ProvincesEnum, { Quantities: string; Values: string; }> =
+		new Map<ProvincesEnum, { Quantities: string; Values: string; }>(
+			[
+				[ProvincesEnum.NovaScotia, { Quantities: "#a6cee3", Values: "#1f78b4" }],
+				[ProvincesEnum.NewBrunswick, { Quantities: "#b2df8a", Values: "#33a02c" }],
+				[ProvincesEnum.PrinceEdwardIsland, { Quantities: "#fb9a99", Values: "#e31a1c" }],
+				[ProvincesEnum.Quebec, { Quantities: "#fdbf6f", Values: "#ff7f00" }],
+				[ProvincesEnum.NewfoundlandAndLabrador, { Quantities: "#cab2d6", Values: "#6a3d9a" }],
+				[ProvincesEnum.BritishColumbia, { Quantities: "#964b00", Values: "#1b0000" }]
+			]
+		);
+
 	static provinces: ProvincesEnum[] = [
 		ProvincesEnum.NovaScotia,
 		ProvincesEnum.NewBrunswick,

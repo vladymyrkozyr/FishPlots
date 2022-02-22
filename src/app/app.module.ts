@@ -15,6 +15,8 @@ import { DropDownsModule } from "@progress/kendo-angular-dropdowns";
 import { LabelModule } from "@progress/kendo-angular-label";
 import { InputsModule } from "@progress/kendo-angular-inputs";
 import { LayoutModule } from "@progress/kendo-angular-layout";
+import { DateInputsModule } from "@progress/kendo-angular-dateinputs";
+
 
 //COMPONENTS
 import { MainPageComponent } from "./components/main-page/main-page.component";
@@ -42,7 +44,8 @@ import { SummaryPieChartComponent } from "./components/charts/summary-pie-chart/
 		DropDownsModule,
 		LabelModule,
 		InputsModule,
-		LayoutModule
+		LayoutModule,
+		DateInputsModule
 	],
 	providers: [HttpClient, DataService],
 	bootstrap: [AppComponent]

@@ -1,12 +1,18 @@
 <div class="d-flex d-flex-row justify-content-space-around">
 	<div class="col-md-4 pl-4">
 		<kendo-floatinglabel [text]="'Years'">
-			<kendo-rangeslider [(value)]="yearsRange"
-						  	   [min]="startYear"
-						       [max]="endYear"
-							   [smallStep]="1"
-							   [largeStep]="2">
-			</kendo-rangeslider>
+			<kendo-numerictextbox [(value)]="startYear"
+								  [spinners]="false"
+								  [format]="'####'"
+								  [min]="1990"
+								  [max]="2018">
+			</kendo-numerictextbox>
+			<kendo-numerictextbox [(value)]="endYear"
+								  [spinners]="false"
+								  [format]="'####'"
+								  [min]="1990"
+								  [max]="2018">
+			</kendo-numerictextbox>
 		</kendo-floatinglabel>
 	</div>
 	<div class="col-md-4">
@@ -48,6 +54,22 @@
 			[icon]="'refresh'"
 			(click)="getData()">
 		Get Data
+	</button>
+	<button kendoButton
+			[icon]="'copy'"
+			(click)="copyStateToClipboard()"
+			class="ml-4">
+		Copy to Clipboard
+	</button>
+</div>
+<div class="d-flex d-flex-row justify-content-center mt-4">
+	<kendo-textbox [(value)]="stateBase64">
+	</kendo-textbox>
+	<button kendoButton
+			[icon]="'refresh'"
+			(click)="loadFromBase64()"
+			class="ml-4">
+		Load Visualization
 	</button>
 </div>
 <kendo-tabstrip [keepTabContent]="true">

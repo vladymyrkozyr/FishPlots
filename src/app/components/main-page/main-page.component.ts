@@ -23,7 +23,8 @@ export class MainPageComponent implements OnInit {
 
 	fishTypesSelected: string[] = DataHelper.fishTypesDefaultSelection;
 	provincesSelected: ProvincesEnum[] = DataHelper.provincesDefaultSelection;
-	yearsRange: [number, number] = [this.startYear, this.endYear];
+
+	dateRange: { start: Date; end: Date } = { start: null, end: null };
 
 	isFishTypeSelected = (item: string): boolean => {
 		return this.fishTypesSelected.some(fishType => fishType == item);
@@ -47,11 +48,12 @@ export class MainPageComponent implements OnInit {
 	summaryPieChartData: any = {};
 	summaryBarChartData: any[] = [];
 
+	stateBase64: string = "";
+
 	@ViewChild("summaryLineChart") summaryLineChart: SummaryLineChartComponent;
 	@ViewChild("summaryScatterPlot") summaryScatterPlot: SummaryScatterPlotComponent;
 	@ViewChild("summaryBarChart") summaryBarChart: SummaryBarChartComponent;
 	@ViewChild("summaryPieChart") summaryPieChart: SummaryPieChartComponent;
-
 
 	constructor(
 		private dataService: DataService
@@ -60,6 +62,8 @@ export class MainPageComponent implements OnInit {
 	ngOnInit() { }
 
 	getData() {
+
+		console.log(this.startYear, this.endYear);
 
 		let fileRequestsQuantities: any[] = [];
 		let fileRequestsValues: any[] = [];
@@ -71,7 +75,7 @@ export class MainPageComponent implements OnInit {
 
 		forkJoin([...fileRequestsQuantities, ...fileRequestsValues]).subscribe((files: any[]) => {
 
-			for (let i: number = 0; i <= DataHelper.yearsAmount; i++) {
+			for (let i: number = 0; i <= this.endYear - this.startYear; i++) {
 
 				this.dataQuantities[i + this.startYear] = files[i].map(fq => {
 					let q: any = {};
@@ -85,7 +89,7 @@ export class MainPageComponent implements OnInit {
 					return q;
 				});
 
-				this.dataValues[i + this.startYear] = files[i + DataHelper.yearsAmount + 1].map(fv => {
+				this.dataValues[i + this.startYear] = files[i + this.endYear - this.startYear + 1].map(fv => {
 					let v: any = {};
 					v.fishType = fv["Species"];
 					v[ProvincesEnum.NovaScotia] = this.parseStringValue(fv[ProvincesEnum.NovaScotia]);
@@ -137,7 +141,7 @@ export class MainPageComponent implements OnInit {
 
 	renderSummaryLineChart() {
 		this.summaryLineChartData = [];
-		for (let i: number = this.yearsRange[0]; i <= this.yearsRange[1]; i++) {
+		for (let i: number = this.startYear; i <= this.endYear; i++) {
 			let d: any = {};
 			d.year = i.toString();
 			this.provincesSelected.forEach(p => {
@@ -152,7 +156,7 @@ export class MainPageComponent implements OnInit {
 
 	renderScatterPlot() {
 		this.summaryScatterPlotData = [];
-		for (let i: number = this.yearsRange[0]; i <= this.yearsRange[1]; i++) {
+		for (let i: number = this.startYear; i <= this.endYear; i++) {
 			let d: any = {};
 			d.year = i.toString();
 
@@ -168,16 +172,46 @@ export class MainPageComponent implements OnInit {
 
 	renderSummaryBarChart() {
 		this.summaryBarChartData = [
-			{ year: this.yearsRange[0], ...this.getQuantitiesAndValuesSummarizedByFishTypeForYear(this.yearsRange[0]) },
-			{ year: this.yearsRange[1], ...this.getQuantitiesAndValuesSummarizedByFishTypeForYear(this.yearsRange[1]) }
+			{ year: this.startYear, ...this.getQuantitiesAndValuesSummarizedByFishTypeForYear(this.startYear) },
+			{ year: this.endYear, ...this.getQuantitiesAndValuesSummarizedByFishTypeForYear(this.endYear) }
 		];
 
 		this.summaryBarChart.renderChart(this.summaryBarChartData, this.fishTypesSelected);
 	}
 
 	renderPieChart() {
-		this.summaryPieChartData = this.getQuantitiesAndValuesSummarizedByFishTypeForYear(this.yearsRange[1]);
-		this.summaryPieChart.renderChart(this.summaryPieChartData, this.yearsRange[1].toString());
+		this.summaryPieChartData = this.getQuantitiesAndValuesSummarizedByFishTypeForYear(this.endYear);
+		this.summaryPieChart.renderChart(this.summaryPieChartData, this.endYear.toString());
+	}
+
+	copyStateToClipboard() {
+		let state = {
+			startYear: this.startYear,
+			endYear:this.endYear,
+			provinces: this.provinces,
+			fishTypes: this.fishTypes
+		};
+		
+		let stateString:string = JSON.stringify(state);
+
+		// Encode the String
+		let stateStringBase64: string = btoa(stateString);
+
+		navigator.clipboard.writeText(stateStringBase64);
+	}
+
+	loadFromBase64() {
+		// Decode the String
+		let stateString: string = atob(this.stateBase64);
+
+		let state = JSON.parse(stateString);
+
+		this.startYear = state.startYear;
+		this.endYear = state.endYear;
+		this.provinces = state.provinces;
+		this.fishTypes = state.fishTypes;
+
+		this.getData();
 	}
 
 }

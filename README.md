@@ -10,7 +10,7 @@ You can also do `ng serve --open` to open it right away in your default browser.
 
 ## Package managers
 
-To download all denendencies you can use `npm install` or `yarn` commands (yarn package manader is preferable).
+To download all denendencies you can use `npm install` or `yarn` commands (yarn package manager is preferable).
 
 ## Build
 

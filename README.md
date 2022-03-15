@@ -24,6 +24,6 @@ Use top controls to select years and additional filtering.
 
 To reload data press button `Get Data`.
 
-Bottom part of scteen contains tabstrip with amCharts visualizations. Please, refer to: https://www.amcharts.com/docs/ for information on how to interact with amCharts components.
+Bottom part of screen contains tabstrip with amCharts visualizations. Please, refer to: https://www.amcharts.com/docs/ for information on how to interact with amCharts components.
 
-For saving the state of current visualization filter parameters, please use `Copy to Clipboard` button. This will generate base64 string. Save it somwhere on you local machine. Next time when you need to access visualizations you can paste that base64 string into the field and press `Load Visualization`.
+For saving the state of current visualization filter parameters, please use `Copy to Clipboard` button. This will generate base64 string. Save it somewhere on you local machine. Next time when you need to access visualizations you can paste that base64 string into the field and press `Load Visualization`.

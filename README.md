@@ -1,4 +1,4 @@
-# ThesisProject
+# Project
 
 This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 9.1.8.
 
@@ -6,22 +6,24 @@ This project was generated with [Angular CLI](https://github.com/angular/angular
 
 Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The app will automatically reload if you change any of the source files.
 
-## Code scaffolding
+You can also do `ng serve --open` to open it right away in your default browser.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Package managers
+
+To download all denendencies you can use `npm install` or `yarn` commands (yarn package manader is preferable).
 
 ## Build
 
 Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory. Use the `--prod` flag for a production build.
 
-## Running unit tests
+## Usage of visualization tool
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+After loading the tool locally or visiting url: https://vladymyrkozyr.github.io/FishPlots/ you will have the main interface loaded.
 
-## Running end-to-end tests
+Use top controls to select years and additional filtering.
 
-Run `ng e2e` to execute the end-to-end tests via [Protractor](http://www.protractortest.org/).
+To reload data press button `Get Data`.
 
-## Further help
+Bottom part of scteen contains tabstrip with amCharts visualizations. Please, refer to: https://www.amcharts.com/docs/ for information on how to interact with amCharts components.
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI README](https://github.com/angular/angular-cli/blob/master/README.md).
+For saving the state of current visualization filter parameters, please use `Copy to Clipboard` button. This will generate base64 string. Save it somwhere on you local machine. Next time when you need to access visualizations you can paste that base64 string into the field and press `Load Visualization`.
